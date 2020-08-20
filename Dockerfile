@@ -30,9 +30,9 @@ ENV \
 # PREREQ + DEBUG --no-install-recommends
 RUN apt-get update && apt-get install -y curl wget apt-utils xz-utils netbase sudo coreutils dnsutils net-tools procps cron tcptraceroute bc
 
-ADD promtail.yml /etc/ 
-ADD promtail /etc/init.d/
-ADD crontab /etc/cron.d/crontab
+ADD ./promtail.yml /etc/ 
+ADD ./promtail /etc/init.d/
+ADD ./crontab /etc/cron.d/crontab
 RUN chmod a+x /etc/init.d/promtail && chmod 0600 /etc/cron.d/crontab && touch /var/log/cron.log 
 
 # from https://github.com/grafana/loki/releases
@@ -100,9 +100,9 @@ RUN cd /usr/bin \
     && sudo mv configuration $CNODE_HOME/files
 
 # ENTRY SCRIPT
-ADD master-topology.sh ./
-ADD guild-topology.sh ./
-ADD entrypoint.sh ./
+ADD ./master-topology.sh ./
+ADD ./guild-topology.sh ./
+ADD ./entrypoint.sh ./
 RUN sudo chown -R guild:guild /home/guild/entrypoint.sh \
     && sudo chown -R guild:guild $CNODE_HOME/files/* \
     && sudo chmod a+x /home/guild/*.sh
