@@ -27,7 +27,7 @@ ENV \
     NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
     NIX_PATH=/nix/var/nix/profiles/per-user/guild/channels
 
-# PREREQ + DEBUG --no-install-recommends
+# PREREQ --no-install-recommends
 RUN apt-get update && apt-get install -y curl wget apt-utils xz-utils netbase sudo coreutils dnsutils net-tools procps cron tcptraceroute bc
 
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/promtail.yml /etc/ 
@@ -108,7 +108,7 @@ RUN sudo chown -R guild:guild /home/guild/entrypoint.sh \
     && sudo chmod a+x /home/guild/*.sh
 
 
-RUN sudo apt-get -y remove exim4 && sudo apt-get -y purge && sudo apt-get -y autoremove #&& sudo rm -rf /usr/bin/apt*
+RUN sudo apt-get -y remove exim4 && sudo apt-get -y purge && sudo apt-get -y autoremove && sudo rm -rf /usr/bin/apt*
 
 # CMD /bin/bash
 ENTRYPOINT ["./entrypoint.sh"]
