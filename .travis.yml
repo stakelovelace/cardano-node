@@ -8,12 +8,12 @@ before_script:
   - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
 
 script:
-  - docker build --compress -t "${IMAGE_NAME}:node" .
+  - docker build --compress -t "${IMAGE_NAME}:master" .
 
 after_script:
 
 deploy:
   provider: script
-  script: docker push "${IMAGE_NAME}:node"
+  script: docker push "${IMAGE_NAME}:master"
   on:
     branch: node
