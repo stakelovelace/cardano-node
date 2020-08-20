@@ -16,4 +16,4 @@ deploy:
   provider: script
   script: docker push "${IMAGE_NAME}:master"
   on:
-    branch: node
+    branch: master
