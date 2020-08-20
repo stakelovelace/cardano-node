@@ -1,0 +1,29 @@
+#!/bin/bash 
+
+start() {
+    /usr/local/bin/promtail -config.file /etc/promtail.yml & 
+}
+
+stop() {
+	killall promtail && sleep 3
+}
+
+case "$1" in
+    start)
+       start
+       ;;
+    stop)
+       stop
+       ;;
+    restart)
+       stop
+       start
+       ;;
+    status)
+       tail /tmp/positions.yaml
+       ;;
+    *) 
+       echo "Usage: $0 {start|stop|status|restart}"
+esac
+
+exit 0
