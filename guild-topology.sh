@@ -2,7 +2,7 @@
  
 export CNODE_HOME=/opt/cardano/cnode
 
-curl -s -o -k /tmp/guild_topology2.json "https://api.clio.one/htopology/v1/fetch/?max=20"
+curl -s -k -o /tmp/guild_topology2.json "https://api.clio.one/htopology/v1/fetch/?max=20"
 
 cat /tmp/guild_topology2.json | awk '{print $3,$5}' | tail -n +2 | sed s/"\","//g  | sed s/"\""//g | sed s/","//g | grep -v [a-z] >  /tmp/guild_list1              
 
