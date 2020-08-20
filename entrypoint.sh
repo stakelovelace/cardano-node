@@ -72,15 +72,7 @@ elif [[ "$NETWORK" == "guild_relay" ]]; then
     --port $CNODE_PORT \
     --socket-path $CNODE_HOME/sockets/node0.socket \
     --topology $CNODE_HOME/priv/files/guild_topology.json
-elif [[ "$NETWORK" == "isppa_relay" ]]; then
-  exec cardano-node run \
-    --config $CNODE_HOME/priv/files/mainnet-config.json \
-    --database-path /tmp/mainnet-combo-db \
-    --host-addr 0.0.0.0 \
-    --port $CNODE_PORT \
-    --socket-path $CNODE_HOME/sockets/node0.socket \
-    --topology $CNODE_HOME/priv/files/isppa_topology.json
 else
-  echo "Please set a NETWORK environment variable to one of: ???"
+  echo "Please set a NETWORK environment variable to one of: relay/master/pool/guild_relay"
   echo "Or mount a /configuration volume containing: configuration.yaml, genesis.json, and topology.json + Pool.cert, Pool.key for active nodes"
 fi
