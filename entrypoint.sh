@@ -11,8 +11,8 @@ echo "NODE: $HOSTNAME - $POOL";
 cardano-node --version;
 
 sudo touch /etc/crontab /etc/cron.*/*
-sudo cron
-sudo service promtail restart 2&>1
+sudo cron  2&>/tmp/null
+sudo service promtail restart 2&>/tmp/null
 
 if [[ $NETWORK = "master" ]] ; then
 sudo bash /home/guild/master-topology.sh
