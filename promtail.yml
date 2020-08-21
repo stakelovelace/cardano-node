@@ -17,5 +17,5 @@ scrape_configs:
       - localhost
     labels:
       job: iptrace
-      __path__: /tmp/ip2trace.log
+      __path__: /tmp/ip2trace_*.log
 
