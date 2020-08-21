@@ -7,7 +7,7 @@ export CNODE_HOME=/opt/cardano/cnode
 export CNODE_PORT=6000
 export POOL=$@ 
 
-echo "NODE: $HOSTNAME";
+echo "NODE: $HOSTNAME - $POOL";
 cardano-node --version;
 
 sudo touch /etc/crontab /etc/cron.*/*
