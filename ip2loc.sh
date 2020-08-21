@@ -22,7 +22,8 @@ sleep 2;
 
 LinesIN=$(cat /tmp/ip2trace_list_in.plog | wc -l)
 LinesOUT=$(cat /tmp/ip2trace_list_out.plog | wc -l)
-timestamp=$(date --rfc-3339=seconds)
-for ((i=1;i<=$LinesIN;i++)); do ADD=$(sed -n "$i"p /tmp/ip2trace_list_in.plog); echo "timestamp=$timestamp,pHOST=$pHOST,pIP=$pIP,pPORT=$pPORT,app=$ADD" | sed s/" country_long"/",country_long"/g >> /tmp/ip2trace_in.log; done
-for ((i=1;i<=$LinesOUT;i++)); do ADD=$(sed -n "$i"p /tmp/ip2trace_list_out.plog); echo "timestamp=$timestamp,pHOST=$pHOST,pIP=$pIP,pPORT=$pPORT,app=$ADD" | sed s/" country_long"/",country_long"/g >> /tmp/ip2trace_out.log; done
+timestamp=$(date +%D)
+time=$(date +%T)
+for ((i=1;i<=$LinesIN;i++)); do ADD=$(sed -n "$i"p /tmp/ip2trace_list_in.plog); echo "timestamp=$timestamp,time=$time,pHOST=$pHOST,pIP=$pIP,pPORT=$pPORT,app=$ADD" | sed s/" country_long"/",country_long"/g >> /tmp/ip2trace_in.log; done
+for ((i=1;i<=$LinesOUT;i++)); do ADD=$(sed -n "$i"p /tmp/ip2trace_list_out.plog); echo "timestamp=$timestamp,time=$time,pHOST=$pHOST,pIP=$pIP,pPORT=$pPORT,app=$ADD" | sed s/" country_long"/",country_long"/g >> /tmp/ip2trace_out.log; done
 
