@@ -19,9 +19,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
 #52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
 
-*/15 * * * * netstat -nt  | grep tcp | grep EST |  awk '{ print $5 }' | cut -d ':' -f 1  | grep -v 172 > /tmp/iptrace_list.csv 2>&1
-*/15 * * * * /usr/local/bin/ip2location -list /tmp/iptrace_list.csv -t all > /tmp/ip2trace.log 2>&1
+*/15 * * * * /home/guild/ip2loc.sh 
 */130 * * * * find /opt/cardano/cnode/logs/  -name "*.json" -type f -mtime +0 -type f -delete
 */35 * * * * history -c 
-*/35 * * * * sudo history -c 
 # Epmty
