@@ -78,5 +78,3 @@ else
   echo "Please set a NETWORK environment variable to one of: relay/master/pool/guild_relay"
   echo "Or mount a /configuration volume containing: configuration.yaml, genesis.json, and topology.json + Pool.cert, Pool.key for active nodes"
 fi
-
-/opt/cardano/cnode/scripts/cntoolsBlockCollector.sh &> /tmp/cntoolsBlockCollector.log
