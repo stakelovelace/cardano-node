@@ -1,4 +1,5 @@
-server: 
+
+server:
   http_listen_address: 127.0.0.1
   http_listen_port: 9080
   grpc_listen_address: 127.0.0.1
@@ -18,4 +19,25 @@ scrape_configs:
     labels:
       job: iptrace
       __path__: /tmp/ip2trace_*.log
-
+  pipeline_stages:
+  - match:
+      selector: '{job="iptrace"}'
+      stages:
+      - regex:
+          expression: '^timestamp=(?P<timestamp>.*)\stime=(?P<time>\w+:\w+:\w+)\spHOST=(?P<pHOST>.*)\spIP=(?P<pIP>\w+.\w+.\w+.\w+)\spPORT=(?P<pPORT>\w+)\sapp=(?P<app>\w+)\sonlineTag=(?P<onineTag>\w+)\shost=(?P<host>\w+.\w+.\w+.\w+)\scountryLongTag=(?P<countryL>\w+)\scountryShortTag=(?P<countryS>\w+)\sCityTag=(?P<city>.*)\sStateTag=(?P<state>\w+)\sTimeZoneTag=(?P<timezone>.*)\scountry_long=(?P<contry_long>\w+)\scountry_short=(?P<country_short>\w+)\scity=(?P<City2>.*)\stimezone=(?P<time>.*)\slatitude=(?P<lat>-?\w+.\w+)\slongitude=(?P<long>-?\w+.\w+)\spacketSent=(?P<packetSent>\w+)\spacketRecv=(?P<packetRecv>\w+)\spacketLost=(?P<packetLost>\w+.\w+)\sminRtt=(?P<minRtt>\d+.\d+)\savgRtt=(?P<avgRtt>\d+.\d+)\smaxRtt=(?P<maxRtt>\d+.\d+)'
+      - labels:
+          host:
+          city:
+          timestamp:
+          time:
+          timezone:
+          pHOST:
+          pIP:
+          pPORT:
+          app:
+          onlineTag:
+          countryL:
+          countryS:
+          state:
+          lat:
+          long:
