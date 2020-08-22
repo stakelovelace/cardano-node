@@ -23,12 +23,13 @@ scrape_configs:
       selector: '{job="iptrace"}'
       stages:
       - regex:
-          expression: '^timestamp=(?P<timestamp>.*)\stime=(?P<time>\w+:\w+:\w+)\spHOST=(?P<pHOST>.*)\spIP=(?P<pIP>\w+.\w+.\w+.\w+)\spPORT=(?P<pPORT>\w+)\sapp=(?P<app>\w+)\sonlineTag=(?P<onineTag>\w+)\shost=(?P<host>\w+.\w+.\w+.\w+)\scountryLongTag=(?P<countryL>\w+)\scountryShortTag=(?P<countryS>\w+)\sCityTag=(?P<city>.*)\sStateTag=(?P<state>\w+)\sTimeZoneTag=(?P<timezone>.*)\scountry_long=(?P<contry_long>\w+)\scountry_short=(?P<country_short>\w+)\scity=(?P<City2>.*)\stimezone=(?P<time>.*)\slatitude=(?P<lat>-?\w+.\w+)\slongitude=(?P<long>-?\w+.\w+)\spacketSent=(?P<packetSent>\w+)\spacketRecv=(?P<packetRecv>\w+)\spacketLost=(?P<packetLost>\w+.\w+)\sminRtt=(?P<minRtt>\d+.\d+)\savgRtt=(?P<avgRtt>\d+.\d+)\smaxRtt=(?P<maxRtt>\d+.\d+)'
+          expression: '^timestamp=(?P<timestamp>.*)\stime=(?P<time>\w+:\w+:\w+)\spHOST=(?P<pHOST>.*)\spIP=(?P<pIP>\w+.\w+.\w+.\w+)\spPORT=(?P<pPORT>\w+)\sapp=(?P<app>\w+)\sonlineTag=(?P<onineTag>\w+)\shost=(?P<host>\w+.\w+.\w+.\w+)\scountryLongTag=(?P<countryL>\w+)\scountryShortTag=(?P<countryS>\w+)\sCityTag=(?P<city>.*)\sStateTag=(?P<state>\w+)\sTimeZoneTag=(?P<timezone>.*)\scountry_long=(?P<contry_long>\w+)\scountry_short=(?P<country_short>\w+)\scity=(?P<City2>.*)\stimezone=(?P<timez>.*)\slatitude=(?P<lat>-?\w+.\w+)\slongitude=(?P<long>-?\w+.\w+)\spacketSent=(?P<packetSent>\w+)\spacketRecv=(?P<packetRecv>\w+)\spacketLost=(?P<packetLost>\w+.\w+)\sminRtt=(?P<minRtt>\d+.\d+)\savgRtt=(?P<avgRtt>\d+.\d+)\smaxRtt=(?P<maxRtt>\d+.\d+)'
       - labels:
           host:
           city:
           timestamp:
           time:
+          timez:
           timezone:
           pHOST:
           pIP:
