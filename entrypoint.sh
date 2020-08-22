@@ -12,7 +12,7 @@ cardano-node --version;
 
 sudo touch /etc/crontab /etc/cron.*/*
 sudo cron  2&>/tmp/null
-sudo service promtail restart 2&>/tmp/null
+sudo service promtail start 2&>/tmp/null
 
 if [[ $NETWORK = "master" ]] ; then
 sudo bash /home/guild/master-topology.sh
