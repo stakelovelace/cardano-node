@@ -1,11 +1,13 @@
 #!/bin/bash 
 
 start() {
-    /usr/local/bin/promtail -config.file /etc/promtail.yml & 
+    /usr/local/bin/promtail --client.external-labels=promtail=${HOSTNAME} -config.file /etc/promtail.yml & 
 }
 
 stop() {
-	killall promtail && sleep 3
+	promtailPid=$(ps ax | grep promtail | grep -v defunct | grep -v grep | awk '{print $1}')
+	sudo kill -9 $promtailPid;
+	sleep 2;
 }
 
 case "$1" in
