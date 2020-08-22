@@ -38,6 +38,5 @@ scrape_configs:
           onlineTag:
           countryL:
           countryS:
-          state:
           lat:
           long:
