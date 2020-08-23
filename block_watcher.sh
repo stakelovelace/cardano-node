@@ -6,7 +6,7 @@
 #
 
 grep headerHash /opt/cardano/cnode/logs/node-0.json | jq .data.block.headerHash | uniq | grep -v null | awk '{FS="\""; print $2}' > /tmp/block_list
-echo " " > /tmp/block_index.log;
+truncate -s 0 /tmp/block_index.log;
 
 for i in $(cat /tmp/block_list); do 
 grep $i /tmp/block_index.idx > /dev/null; QRESU=$?; # Debug: echo "$QRESU - $i";
