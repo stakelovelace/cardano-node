@@ -3,8 +3,8 @@
 # and files in /etc/cron.d. These files also have username fields,
 # that none of the other crontabs do.
 
-SHELL=/bin/sh
-PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+SHELL=/bin/bash
+PATH=/nix/var/nix/profiles/per-user/guild/profile/bin:/nix/var/nix/profiles/per-user/guild/profile/sbin:/opt/cardano/cnode/scripts:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin:/usr/local/bin \
 
 # Example of job definition:
 # .---------------- minute (0 - 59)
