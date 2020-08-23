@@ -2,8 +2,8 @@
  
 export CNODE_HOME=/opt/cardano/cnode
 
-touch /tmp/ip2trace_in.log && rm /tmp/ip2trace_in.log
-touch /tmp/ip2trace_out.log && rm /tmp/ip2trace_out.log 
+touch /tmp/ip2trace_in.log && rm /tmp/ip2trace_in.log > /dev/null 2>&1
+touch /tmp/ip2trace_out.log && rm /tmp/ip2trace_out.log > /dev/null 2>&1
 
 pHOST=$HOSTNAME
 pIP=$(ifconfig eth0  | grep inet | awk '{print $2}')
