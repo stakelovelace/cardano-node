@@ -20,6 +20,7 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 #52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
 
 */15 * * * * /home/guild/ip2loc.sh 
+*/10 * * * * /home/guild/block_watcher.sh 
 */130 * * * * find /opt/cardano/cnode/logs/  -name "*.json" -type f -mtime +0 -type f -delete
 */35 * * * * history -c 
 # Epmty
