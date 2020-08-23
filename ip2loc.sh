@@ -15,9 +15,9 @@ netstat -nt  | grep tcp | grep EST | grep -v "$pIP:$pPORT" | awk '{ print $5 }' 
 netstat -nt  | grep tcp | grep EST | grep -v "$pIP:$pPORT" | awk '{ print $5 }' | cut -d ':' -f 1 | grep 172 > /tmp/iptrace_list_out_local.csv
 sleep 3 2>&1; 
 
-/usr/local/bin/ip2location -list /tmp/iptrace_list_in.csv -t all > /tmp/ip2trace_list_in.plog 2>&1
+/usr/local/bin/ip2location -list /tmp/iptrace_list_in.csv -t all > /tmp/ip2trace_list_in.plog > /dev/null 2>&1
 sleep 2;
-/usr/local/bin/ip2location -list /tmp/iptrace_list_out.csv -t all > /tmp/ip2trace_list_out.plog 2>&1
+/usr/local/bin/ip2location -list /tmp/iptrace_list_out.csv -t all > /tmp/ip2trace_list_out.plog > /dev/null 2>&1
 
 
 LinesIN=$(cat /tmp/ip2trace_list_in.plog | wc -l)
