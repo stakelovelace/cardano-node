@@ -9,9 +9,9 @@ grep headerHash /opt/cardano/cnode/logs/node-0.json | jq .data.block.headerHash 
 truncate -s 0 /tmp/block_index.log;
 
 for i in $(cat /tmp/block_list); do 
-grep $i /tmp/block_index.idx > /dev/null; QRESU=$?; # Debug: echo "$QRESU - $i";
+grep $i /tmp/block_index.idx > /dev/null; QRESU=$?;
 if [[ $QRESU -gt 0 ]]; then
-    BLOCK=$(cat /opt/cardano/cnode/logs/node-0.json | grep $i | head -n 1); # Debug: echo "$BLOCK - $i";
+    BLOCK=$(cat /opt/cardano/cnode/logs/node-0.json | grep $i | head -n 1);
     echo $BLOCK >> /tmp/block_index.log;
     echo $BLOCK >> /tmp/block_index.idx;
 fi
