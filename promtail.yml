@@ -40,3 +40,38 @@ scrape_configs:
           countryS:
           lat:
           long:
+
+- job_name: blocktrace
+  static_configs:
+  - targets:
+      - localhost
+    labels:
+      job: blocktrace
+      __path__: /tmp/block_index.log
+  pipeline_stages:
+    - json:
+        expressions:
+          block_data: data
+          block_timestamp: at
+          block_env: env
+          block_kind: data.kind
+          block_data_kind: data.block.kind
+          block_slot: data.block.slot
+          block_headerHash: data.block.headerHash
+          block_host: host
+          block_severity: sev
+          block_thread: thread
+          block_pid: pid
+    - labels:
+       block_data:
+       block_timestamp:
+       block_env:
+       ns:
+       block_kind:
+       block_data_kind:
+       block_slot:
+       block_headerHash:
+       block_host:
+       block_severity:
+       block_thread:
+       block_pid:
