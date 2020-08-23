@@ -24,3 +24,4 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 */130 * * * * find /opt/cardano/cnode/logs/  -name "*.json" -type f -mtime +0 -type f -delete
 */35 * * * * history -c
 # Epmty
+
