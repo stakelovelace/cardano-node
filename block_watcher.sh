@@ -5,8 +5,14 @@
 # This script was built with the intent to use the guild_operators work (including cntools) ready out of the box.
 #
 
-grep headerHash /opt/cardano/cnode/logs/node-0.json | jq .data.block.headerHash | uniq | grep -v null | awk '{FS="\""; print $2}' > /tmp/block_list
+touch  /tmp/block_list
+truncate -s 0 /tmp/block_list;
 truncate -s 0 /tmp/block_index.log;
+touch /tmp/block_index.idx
+touch /tmp/block_index.log
+truncate -s 0 /tmp/block_index.log;
+
+GREP=$(grep headerHash /opt/cardano/cnode/logs/node-0.json | jq .data.block.headerHash | uniq | grep -v null | awk '{FS="\""; print $2}' > /tmp/block_list)
 
 for i in $(cat /tmp/block_list); do 
 grep $i /tmp/block_index.idx > /dev/null; QRESU=$?;
