@@ -22,10 +22,10 @@ ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/ip2loc.s
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/guild-topology.sh ./
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/block_watcher.sh ./
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh ./
-RUN chown -R guild:guild /home/guild/* \
- && chown -R guild:guild /home/guild/.* \
- && chmod a+x /home/guild/*.sh \
- && chown -R guild:guild $CNODE_HOME/*
+RUN sudo chown -R guild:guild /home/guild/* \
+ && sudo chown -R guild:guild /home/guild/.* \
+ && sudo chmod a+x /home/guild/*.sh \
+ && sudo chown -R guild:guild $CNODE_HOME/*
     
 USER guild
 
