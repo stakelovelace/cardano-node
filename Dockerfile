@@ -1,20 +1,7 @@
-FROM debian
+FROM stakelovelace/cardano-htn:stage3
 
 ARG DEBIAN_FRONTEND=noninteractive
-
-COPY --from=stakelovelace/cardano-htn:stage3 /etc /etc
-COPY --from=stakelovelace/cardano-htn:stage3 /nix /nix
-COPY --from=stakelovelace/cardano-htn:stage3 /bin /bin
-COPY --from=stakelovelace/cardano-htn:stage3 /sbin /sbin
-COPY --from=stakelovelace/cardano-htn:stage3 /usr/bin /usr/bin
-COPY --from=stakelovelace/cardano-htn:stage3 /usr/sbin /usr/sbin
-COPY --from=stakelovelace/cardano-htn:stage3 /usr/lib /usr/lib
-COPY --from=stakelovelace/cardano-htn:stage3 /lib /lib
-COPY --from=stakelovelace/cardano-htn:stage3 /lib64 /lib64
-COPY --from=stakelovelace/cardano-htn:stage3 /usr/local/bin /usr/local/bin
-COPY --from=stakelovelace/cardano-htn:stage3 /home/guild /home/guild
-COPY --from=stakelovelace/cardano-htn:stage3 /opt/cardano /opt/cardano
-
+    
 ENV \
     ENV=/etc/profile \
     LC_ALL=en_US.UTF-8 \
