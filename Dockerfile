@@ -25,7 +25,8 @@ ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoi
 RUN sudo chown -R guild:guild /home/guild/* \
  && sudo chown -R guild:guild /home/guild/.* \
  && sudo chmod a+x /home/guild/*.sh \
- && sudo chown -R guild:guild $CNODE_HOME/*
+ && sudo chown -R guild:guild $CNODE_HOME/* \
+ && sudo rm -rf /usr/bin/apt* && sudo rm /nix/var/nix/profiles/per-user/guild/profile/bin/nix-* 
     
 USER guild
 
