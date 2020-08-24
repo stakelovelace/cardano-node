@@ -25,8 +25,7 @@ ENV \
     GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt \
     NIX_SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt \
     NIX_PATH=/nix/var/nix/profiles/per-user/guild/channels
-    
-USER guild
+
 WORKDIR /home/guild
 
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/master-topology.sh ./
@@ -34,9 +33,11 @@ ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/ip2loc.s
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/guild-topology.sh ./
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/block_watcher.sh ./
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh ./
-RUN sudo chown -R guild:guild /home/guild/* \
- && sudo chown -R guild:guild /home/guild/.* \
- && sudo chmod a+x /home/guild/*.sh \
- && sudo chown -R guild:guild $CNODE_HOME/*
+RUN chown -R guild:guild /home/guild/* \
+ && chown -R guild:guild /home/guild/.* \
+ && chmod a+x /home/guild/*.sh \
+ && chown -R guild:guild $CNODE_HOME/*
     
+USER guild
+
 ENTRYPOINT ["./entrypoint.sh"]
