@@ -58,15 +58,17 @@ scrape_configs:
           block_data_kind: data.block.kind
           block_slot: data.block.slot
           block_headerHash: data.block.headerHash
+          block_hash: data.blockHash
+          block_bslot: data.slot
           block_host: host
           block_severity: sev
           block_thread: thread
-          block_pid: pid
     - labels:
        block_data:
        block_timestamp:
        block_env:
-       ns:
+       block_hash:
+       block_bslot:
        block_kind:
        block_data_kind:
        block_slot:
@@ -74,4 +76,3 @@ scrape_configs:
        block_host:
        block_severity:
        block_thread:
-       block_pid:
