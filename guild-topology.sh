@@ -44,7 +44,7 @@ cat <<EOF > $CNODE_HOME/priv/files/guild_topology.json
   { "addr": "$AADD8", "port": $AADD8PORT, "valency": 1, "distance":10 },
   { "addr": "78.47.99.41", "port": 6000, "valency": 2, "distance":10 },
   { "addr": "168.119.51.182", "port": 6000, "valency": 2, "distance":10 },
-  { "addr": "159.69.185.211", "port": 6000, "valency": 2, "distance":10 }
+  { "addr": "95.216.207.178", "port": 6000, "valency": 2, "distance":10 }
 ] }
 EOF
 
