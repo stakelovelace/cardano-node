@@ -73,7 +73,7 @@ cat <<EOF > /opt/cardano/cnode/priv/files/mainnet-master.json
     },
     {
       "operator": "R03",
-      "addr": "159.69.185.211",
+      "addr": "95.216.207.178",
       "port": 6000,
       "valency": 1
     }
