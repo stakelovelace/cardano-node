@@ -23,7 +23,7 @@ scrape_configs:
       selector: '{job="iptrace"}'
       stages:
       - regex:
-          expression: '^timestamp=(?P<timestamp>\w+/\w+/\w+)\stime=(?P<time>\w+:\w+:\w+)\spHOST=(?P<pHOST>\w+)\spIP=(?P<pIP>\w+.\w+.\w+.\w+)\spPORT=(?P<pPORT>\w+)\sapp=(?P<app>\w+)\sonlineTag=(?P<onlineTag>\w+)\shost=(?P<host>\w+.\w+.\w+.\w+)\scountryLongTag=(?P<countryL>([-a-zA-Z]+|[\w+]+))\scountryShortTag=(?P<countryS>\w+)\sCityTag=(?P<city>([-a-zA-Z]+|[\w+]+))\sStateTag=(?P<state>([-a-zA-Z]+|[\w+]+))\sTimeZoneTag=(?P<timezone>[+-]?\w+:\w+)\scountry_long=(?P<contry_long>([-a-zA-Z]+|[\w+]+))\scountry_short=(?P<country_short>\w+)\scity=(?P<City2>([-a-zA-Z]+|[\w+]+))\sstate=(?P<state2>([-a-zA-Z]+|[\w+]+))\stimezone=(?P<timez>[+-]?\w+:\w+)\slatitude=(?P<lat>[+-]?\w+.\w+)\slongitude=(?P<long>[+-]?\w+.\w+)\spacketSent=(?P<packetSent>\w+)\spacketRecv=(?P<packetRecv>\w+)\spacketLost=(?P<packetLost>\w+.\w+)\sminRtt=(?P<minRtt>[0|\d]+.?[ |\d]+)avgRtt=(?P<avgRtt>[0|\d]+.?[ |\d]+)maxRtt=(?P<maxRtt>[0|\d]+.?[ |\d]+)online=(?P<online>\w+)'
+          expression: '^timestamp=(?P<timestamp>\w+/\w+/\w+)\stime=(?P<time>\w+:\w+:\w+)\spHOST=(?P<pHOST>\w+)\spIP=(?P<pIP>\w+.\w+.\w+.\w+)\spPORT=(?P<pPORT>\w+)\sapp=(?P<app>\w+)\sonlineTag=(?P<onlineTag>\w+)\shost=(?P<host>\w+.\w+.\w+.\w+)\scountryLongTag=(?P<countryL>([-a-zA-Z]+|[\w+]+))\scountryShortTag=(?P<country>\w+)\sCityTag=(?P<city>([-a-zA-Z]+|[\w+]+))\sStateTag=(?P<state>([-a-zA-Z]+|[\w+]+))\sTimeZoneTag=(?P<timezone>[+-]?\w+:\w+)\scountry_long=(?P<contry_long>([-a-zA-Z]+|[\w+]+))\scountry_short=(?P<country_short>\w+)\scity=(?P<City2>([-a-zA-Z]+|[\w+]+))\sstate=(?P<state2>([-a-zA-Z]+|[\w+]+))\stimezone=(?P<timez>[+-]?\w+:\w+)\slatitude=(?P<latitude>[+-]?\w+.\w+)\slongitude=(?P<longitude>[+-]?\w+.\w+)\spacketSent=(?P<packetSent>\w+)\spacketRecv=(?P<packetRecv>\w+)\spacketLost=(?P<packetLost>\w+.\w+)\sminRtt=(?P<minRtt>[0|\d]+.?[ |\d]+)avgRtt=(?P<avgRtt>[0|\d]+.?[ |\d]+)maxRtt=(?P<maxRtt>[0|\d]+.?[ |\d]+)online=(?P<online>\w+)'
       - labels:
           host:
           city:
@@ -37,9 +37,9 @@ scrape_configs:
           app:
           onlineTag:
           countryL:
-          countryS:
-          lat:
-          long:
+          country:
+          latitude:
+          longitude:
 
 - job_name: blocktrace
   static_configs:
