@@ -27,14 +27,10 @@ scrape_configs:
       - labels:
           host:
           city:
-          state:
-          timestamp:
-          time:
           timezone:
           pHOST:
           pIP:
           pPORT:
-          app:
           onlineTag:
           countryL:
           country:
