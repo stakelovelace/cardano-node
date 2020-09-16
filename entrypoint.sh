@@ -63,8 +63,8 @@ elif [[ "$NETWORK" == "pool" ]]; then
     --port $CNODE_PORT \
     --socket-path $CNODE_HOME/sockets/node0.socket \
     --shelley-operational-certificate $CNODE_HOME/priv/$POOL/op.cert \
-    --shelley-kes-key $CNODE_HOME/priv/$POOL/kes.skey \
-    --shelley-vrf-key $CNODE_HOME/priv/$POOL/vrf.skey \
+    --shelley-kes-key $CNODE_HOME/priv/pool/$POOL/kes.skey \
+    --shelley-vrf-key $CNODE_HOME/priv/pool/$POOL/vrf.skey \
     --topology $CNODE_HOME/priv/files/mainnet-topology.json
 elif [[ "$NETWORK" == "guild_relay" ]]; then
   exec cardano-node run \
