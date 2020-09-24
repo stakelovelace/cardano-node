@@ -19,8 +19,8 @@ PATH=/nix/var/nix/profiles/per-user/guild/profile/bin:/nix/var/nix/profiles/per-
 #47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
 #52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
 
-*/10 * * * * /home/guild/ip2loc.sh 2>/dev/null 
-*/5 * * * * /home/guild/block_watcher.sh 2>/dev/null 
+*/10 * * * * /home/guild/.scripts/ip2loc.sh 2>/dev/null 
+*/5 * * * * /home/guild/.scripts/block_watcher.sh 2>/dev/null 
 */130 * * * * find /opt/cardano/cnode/logs/  -name "*.json" -type f -mtime +0 -type f -delete
 */35 * * * * history -c
 # Epmty
