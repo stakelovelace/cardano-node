@@ -15,11 +15,11 @@ sudo cron  > /dev/null 2>&1
 sudo /etc/init.d/promtail start > /dev/null 2>&1
 
 if [[ $NETWORK = "master" ]] ; then
-sudo bash /home/guild/master-topology.sh > /dev/null 2>&1
+sudo bash /home/guild/.scripts/master-topology.sh > /dev/null 2>&1
 fi
 
 if [[ $NETWORK = "guild_relay" ]] ; then
-sudo bash /home/guild/guild-topology.sh > /dev/null 2>&1
+sudo bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1
 fi
 
 
