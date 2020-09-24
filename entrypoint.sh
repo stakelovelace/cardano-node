@@ -76,5 +76,5 @@ elif [[ "$NETWORK" == "guild_relay" ]]; then
     --topology $CNODE_HOME/priv/files/guild_topology.json
 else
   echo "Please set a NETWORK environment variable to one of: relay/master/pool/guild_relay"
-  echo "Or mount a /configuration volume containing: configuration.yaml, genesis.json, and topology.json + Pool.cert, Pool.key for active nodes"
+  echo "Or mount a '$CNODE_HOME/priv/files' volume containing: mainnet-config.json, mainnet-shelley-genesis.json, mainnet-byron-genesis.json, and mainnet-topology.json + $CNODE_HOME/priv/pool/$POOL/op.cert, $CNODE_HOME/priv/pool/$POOL/hot.skey and $CNODE_HOME/priv/pool/$POOL/vrf.skey for active nodes"
 fi
