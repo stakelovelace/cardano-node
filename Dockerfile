@@ -78,7 +78,7 @@ ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/master-t
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/ip2loc.sh  /home/guild/.scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/guild-topology.sh  /home/guild/.scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/block_watcher.sh  /home/guild/.scripts/
-ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh  /home/guild/.scripts/
+ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh  /home/guild/
 RUN sudo chown -R guild:guild  /home/guild/.scripts/*.sh \
     && sudo chown -R guild:guild $CNODE_HOME/* \
     && sudo chown -R guild:guild /home/guild/.* 
