@@ -54,7 +54,7 @@ elif [[ "$NETWORK" == "testnet" ]]; then
     --host-addr 0.0.0.0 \
     --port $CNODE_PORT \
     --socket-path $CNODE_HOME/sockets/node0.socket \
-    --topology $CNODE_HOME/priv/files/testnet-master.json
+    --topology $CNODE_HOME/priv/files/testnet-topology.json
 elif [[ "$NETWORK" == "master" ]]; then
   exec cardano-node run \
     --config $CNODE_HOME/priv/files/mainnet-config.json \
