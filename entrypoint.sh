@@ -47,6 +47,14 @@ if [[ "$NETWORK" == "relay" ]]; then
     --port $CNODE_PORT \
     --socket-path $CNODE_HOME/sockets/node0.socket \
     --topology $CNODE_HOME/priv/files/mainnet-topology.json
+elif [[ "$NETWORK" == "testnet" ]]; then
+  exec cardano-node run \
+    --config $CNODE_HOME/priv/files/testnet-config.json \
+    --database-path $CNODE_HOME/priv/testnet-combo-db \
+    --host-addr 0.0.0.0 \
+    --port $CNODE_PORT \
+    --socket-path $CNODE_HOME/sockets/node0.socket \
+    --topology $CNODE_HOME/priv/files/testnet-master.json
 elif [[ "$NETWORK" == "master" ]]; then
   exec cardano-node run \
     --config $CNODE_HOME/priv/files/mainnet-config.json \
@@ -75,6 +83,6 @@ elif [[ "$NETWORK" == "guild_relay" ]]; then
     --socket-path $CNODE_HOME/sockets/node0.socket \
     --topology $CNODE_HOME/priv/files/guild_topology.json
 else
-  echo "Please set a NETWORK environment variable to one of: relay/master/pool/guild_relay"
+  echo "Please set a NETWORK environment variable to one of: relay/testnet/master/pool/guild_relay"
   echo "Or mount a '$CNODE_HOME/priv/files' volume containing: mainnet-config.json, mainnet-shelley-genesis.json, mainnet-byron-genesis.json, and mainnet-topology.json + $CNODE_HOME/priv/pool/$POOL/op.cert, $CNODE_HOME/priv/pool/$POOL/hot.skey and $CNODE_HOME/priv/pool/$POOL/vrf.skey for active nodes"
 fi
