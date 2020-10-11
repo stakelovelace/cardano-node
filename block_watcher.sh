@@ -5,6 +5,9 @@
 # This script was built with the intent to use the guild_operators work (including cntools) ready out of the box.
 #
 
+
+HOSTNAME=$HOSTNAME; 
+
 touch  /tmp/block_list
 truncate -s 0 /tmp/block_list;
 truncate -s 0 /tmp/block_index.log;
@@ -20,11 +23,11 @@ grep $i /tmp/block_index.idx > /dev/null; QRESU=$?;
 if [[ $QRESU -gt 0 ]]; then
     BLOCK=$(cat /opt/cardano/cnode/logs/node-0.json | grep $i | head -n 1);
     BLOCK2=$(cat /opt/cardano/cnode/logs/node-0.json | grep TraceAdoptedBlock | grep $i | head -n 1);
-    echo $BLOCK >> /tmp/block_index.log;
-    echo $BLOCK >> /tmp/block_index.idx;
+    echo $BLOCK | sed 's/"host":".........."/"host":"'"$HOSTNAME"'",\"/' >> /tmp/block_index.log;
+    echo $BLOCK | sed 's/"host":".........."/"host":"'"$HOSTNAME"'",\"/' >> /tmp/block_index.idx;
     if [ ! -z "$BLOCK2" ]; then 
-    echo $BLOCK2 >> /tmp/block_index.log;
-    echo $BLOCK2 >> /tmp/block_index.idx;
+    echo $BLOCK2 | sed 's/"host":".........."/"host":"'"$HOSTNAME"'",\"/' >> /tmp/block_index.log;
+    echo $BLOCK2 | sed 's/"host":".........."/"host":"'"$HOSTNAME"'",\"/'>> /tmp/block_index.idx;
     else 
     echo "No TraceAdoptedBlock"; 
     fi
