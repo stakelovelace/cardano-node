@@ -1,10 +1,14 @@
 #!/bin/bash
 
+if [ -n "$1" ]; then
+  NETWORK=$1
+fi
+
 echo "NETWORK: $NETWORK";
 . ~/.bashrc
 
-export CNODE_HOME=/opt/cardano/cnode 
-export CNODE_PORT=6000
+[[ -z "${CNODE_HOME}" ]] && export CNODE_HOME=/opt/cardano/cnode 
+[[ -z "${CNODE_PORT}" ]] && export CNODE_PORT=6000
 export POOL=$@ 
 
 echo "NODE: $HOSTNAME - $POOL";
