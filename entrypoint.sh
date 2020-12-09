@@ -25,11 +25,6 @@ if [[ $dbsize < $tnsizedb ]] && [[ $NETWORK == "testnet" ]] ; then
 cp -rf $CNODE_HOME/priv/testnet-db ${CNODE_HOME}/db \ 2>/dev/null
 fi
 
-if [[ "${POOL_NAME}" ]] ; then 
-export POOL_DIR="$CNODE_HOME/priv/pool/$POOL_NAME"
-echo "POOL_DIR set to: $POOL_DIR" ;
-fi
-
 # EKG Exposed
 #socat -d tcp-listen:12782,reuseaddr,fork tcp:127.0.0.1:12781 
 
