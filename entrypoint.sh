@@ -18,11 +18,11 @@ tnsizedb=$(du -s $CNODE_HOME/priv/testnet-db | awk '{print $1}')
 mnsizedb=$(du -s $CNODE_HOME/priv/mainnet-db | awk '{print $1}')
 
 if [[ $dbsize < $mnsizedb ]] && [[ $NETWORK == "mainnet" ]]; then
-cp -rf $CNODE_HOME/priv/mainnet-db ${CNODE_HOME}/db 2>/dev/null
+cp -rf $CNODE_HOME/priv/mainnet-db/* ${CNODE_HOME}/db 2>/dev/null
 fi
 
 if [[ $dbsize < $tnsizedb ]] && [[ $NETWORK == "testnet" ]] ; then
-cp -rf $CNODE_HOME/priv/testnet-db ${CNODE_HOME}/db \ 2>/dev/null
+cp -rf $CNODE_HOME/priv/testnet-db/* ${CNODE_HOME}/db 2>/dev/null
 fi
 
 # EKG Exposed
