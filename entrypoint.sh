@@ -36,6 +36,14 @@ elif [[ "$NETWORK" == "testnet" ]]; then
   export TOPOLOGY="$CNODE_HOME/priv/files/testnet-topology.json" \
   && export CONFIG="$CNODE_HOME/priv/files/testnet-config.json" \
   && exec $CNODE_HOME/scripts/cnode.sh
+elif [[ "$NETWORK" == "launchpad" ]]; then
+  export TOPOLOGY="$CNODE_HOME/priv/files/launchpad-topology.json" \
+  && export CONFIG="$CNODE_HOME/priv/files/launchpad-config.json" \
+  && exec $CNODE_HOME/scripts/cnode.sh
+elif [[ "$NETWORK" == "allegra" ]]; then
+  export TOPOLOGY="$CNODE_HOME/priv/files/allegra-topology.json" \
+  && export CONFIG="$CNODE_HOME/priv/files/allegra-config.json" \
+  && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guildnet" ]]; then
   export TOPOLOGY="$CNODE_HOME/priv/files/guild_topology.json" \
   && export CONFIG="${CNODE_HOME}/files/config.json" \
