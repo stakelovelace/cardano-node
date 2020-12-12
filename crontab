@@ -19,10 +19,10 @@ PATH=/nix/var/nix/profiles/per-user/guild/profile/bin:/nix/var/nix/profiles/per-
 #47 6    * * 7   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.weekly )
 #52 6    1 * *   root    test -x /usr/sbin/anacron || ( cd / && run-parts --report /etc/cron.monthly )
 
-*/10 * * * * if [ -z $NOIP2 ]; then /home/guild/.scripts/ip2loc.sh 2>/dev/null; else echo doingnothing; fi
-*/5 * * * * if [ -z $NOBLW ]; then /home/guild/.scripts/block_watcher.sh 2>/dev/null; else echo doingnothing; fi
-*/130 * * * * if [ -z $KEEP ]; then find /opt/cardano/cnode/logs/  -name "*.json" -type f -mtime +0 -type f -delete; else echo doingnothing; fi
-0 */3 * * * if [ -z $NOREC ]; then cp -rf /opt/cardano/cnode/db/* /opt/cardano/cnode/priv/$NETWORK-db/ 2>/dev/null; else echo doingnothing; fi
+*/10 * * * * if [ -z $NOIP2 ]; then /home/guild/.scripts/ip2loc.sh 2>/dev/null; fi
+*/5 * * * * if [ -z $NOBLW ]; then /home/guild/.scripts/block_watcher.sh 2>/dev/null; fi
+*/130 * * * * if [ -z $KEEP ]; then find /opt/cardano/cnode/logs/  -name "*.json" -type f -mtime +0 -type f -delete; fi
+0 */3 * * * if [ -z $NOREC ]; then cp -rf /opt/cardano/cnode/db/* /opt/cardano/cnode/priv/$NETWORK-db/ 2>/dev/null; fi
 */35 * * * * history -c
 # Epmty
 
