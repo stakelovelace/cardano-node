@@ -22,7 +22,7 @@ PATH=/nix/var/nix/profiles/per-user/guild/profile/bin:/nix/var/nix/profiles/per-
 */10 * * * * /home/guild/.scripts/ip2loc.sh 2>/dev/null 
 */5 * * * * /home/guild/.scripts/block_watcher.sh 2>/dev/null 
 */130 * * * * find /opt/cardano/cnode/logs/  -name "*.json" -type f -mtime +0 -type f -delete
-0 */3 * * * cp -rf /opt/cardano/cnode/db/* /opt/cardano/cnode/priv/$NETWORK-db/ 2>/dev/null 
+0 */3 * * * if [ -z $RECOVERY ]; then echo doingnothing; else cp -rf /opt/cardano/cnode/db/* /opt/cardano/cnode/priv/$NETWORK-db/ 2>/dev/null; fi
 */35 * * * * history -c
 # Epmty
 
