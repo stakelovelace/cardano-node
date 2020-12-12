@@ -1,6 +1,6 @@
 #!/bin/bash
 
-head -n 10 ~/.banner.txt
+head -n 8 ~/.banner.txt
 
 . ~/.bashrc > /dev/null 2>&1
 
