@@ -6,11 +6,13 @@
                          /_/ 
                          
 
-Small slant: 4
+Small slant: 5
 
 Big: 3
 
 Cybermedium: 1
+
+Tinker-Toy: 1
 
 
 Chris:
@@ -21,6 +23,8 @@ Small slant
 
 Homer:
 
+Red:
+Small slant - Tinker-Toy
 
 Pryiank:
 Small slant
