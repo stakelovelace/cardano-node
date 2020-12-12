@@ -9,11 +9,11 @@
 
 
 
-Small slant: 5
+Small slant: 7
 
-Big: 3
+Big: 4
 
-Cybermedium: 1
+Cybermedium: 2
 
 Tinker-Toy: 1
 
@@ -25,6 +25,7 @@ Markus:
 Small slant
 
 Homer:
+Small slant
 
 Red:
 Small slant - Tinker-Toy
@@ -38,6 +39,8 @@ Big or small slant
 Ola:
 1: small slant 2: Big
 
+Adam:
+Big, cyber medium, small slant
 
 MENU
 Availbles tools:
