@@ -50,7 +50,7 @@ elif [[ "$NETWORK" == "guildnet" ]]; then
   && sudo bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1 \
   && exec $CNODE_HOME/scripts/cnode.sh
 else
-  echo "Please set a NETWORK environment variable to one of: mainnet / testnet / guildnet"
+  echo "Please set a NETWORK environment variable to one of: mainnet / testnet / allegra / launchpad / guildnet"
   echo "mount a '$CNODE_HOME/priv/files' volume containing: mainnet-config.json, mainnet-shelley-genesis.json, mainnet-byron-genesis.json, and mainnet-topology.json "
   echo "for active nodes set POOL_DIR environment variable where op.cert, hot.skey and vrf.skey files reside. (usually under '${CNODE_HOME}/priv/pool/$POOL_NAME' ) "
   echo "or just set POOL_NAME environment variable (for default path). "
