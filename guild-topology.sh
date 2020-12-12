@@ -29,7 +29,7 @@ AADD7PORT=$(sed -n 7p /tmp/guild_list3 | awk '{print $2}')
 AADD8=$(sed -n 8p /tmp/guild_list3 | awk '{print $1}')
 AADD8PORT=$(sed -n 8p /tmp/guild_list3 | awk '{print $2}')
 
-cat <<EOF > $CNODE_HOME/priv/files/guild_topology.json
+cat <<EOF > $CNODE_HOME/priv/files/guildnet-topology.json
 { "resultcode": "201", "networkMagic": "764824073", "ipType":4, "Producers": [
   { "addr": "relays-new.cardano-mainnet.iohk.io", "port": 3001, "valency": 2, "distance":10 },
   { "addr": "172.31.0.55", "port": 6000, "valency": 3, "distance":10 },
