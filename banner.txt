@@ -6,6 +6,9 @@
                          /_/ 
                          
 
+
+
+
 Small slant: 5
 
 Big: 3
