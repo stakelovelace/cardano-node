@@ -9,11 +9,11 @@
 
 
 
-Small slant: 7
+Small slant: 6
 
 Big: 4
 
-Cybermedium: 2
+Cybermedium: 3
 
 Tinker-Toy: 1
 
@@ -25,7 +25,7 @@ Markus:
 Small slant
 
 Homer:
-Small slant
+Cybermedium
 
 Red:
 Small slant - Tinker-Toy
