@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "NETWORK: $NETWORK";
+echo "NETWORK: $NETWORK $POOL_NAME";
 . ~/.bashrc
 
 export CNODE_HOME=/opt/cardano/cnode
