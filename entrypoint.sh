@@ -1,7 +1,10 @@
 #!/bin/bash
 
+head -n 10 ~/.banner.txt
+
+. ~/.bashrc > /dev/null 2>&1
+
 echo "NETWORK: $NETWORK $POOL_NAME";
-. ~/.bashrc
 
 export CNODE_HOME=/opt/cardano/cnode
 export CNODE_PORT=6000
