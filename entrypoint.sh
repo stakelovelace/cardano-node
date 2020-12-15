@@ -1,8 +1,8 @@
 #!/bin/bash
 
-set -e
-set -u
-set -o pipefail
+#set -e
+#set -u
+#set -o pipefail
 
 trap 'killall -s SIGTERM cardano-node' SIGINT SIGTERM
 
