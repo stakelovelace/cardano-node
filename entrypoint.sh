@@ -1,5 +1,11 @@
 #!/bin/bash
 
+set -e
+set -u
+set -o pipefail
+
+trap 'killall -s SIGTERM cardano-node' SIGINT SIGTERM
+
 head -n 8 ~/.banner.txt
 
 . ~/.bashrc > /dev/null 2>&1
@@ -22,6 +28,7 @@ bksizedb=$(du -s $CNODE_HOME/priv/$NETWORK-db 2>/dev/null | awk '{print $1}')
 if [[ "$dbsize" -lt "$bksizedb" ]]; then
 cp -rf $CNODE_HOME/priv/$NETWORK-db/* ${CNODE_HOME}/db 2>/dev/null
 fi
+
 
 # EKG Exposed
 #socat -d tcp-listen:12782,reuseaddr,fork tcp:127.0.0.1:12781 
