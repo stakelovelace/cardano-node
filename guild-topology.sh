@@ -28,6 +28,10 @@ AADD7=$(sed -n 7p /tmp/guild_list3 | awk '{print $1}')
 AADD7PORT=$(sed -n 7p /tmp/guild_list3 | awk '{print $2}')
 AADD8=$(sed -n 8p /tmp/guild_list3 | awk '{print $1}')
 AADD8PORT=$(sed -n 8p /tmp/guild_list3 | awk '{print $2}')
+AADD9=$(sed -n 9p /tmp/guild_list3 | awk '{print $1}')
+AADD9PORT=$(sed -n 9p /tmp/guild_list3 | awk '{print $2}')
+AADD10=$(sed -n 10p /tmp/guild_list3 | awk '{print $1}')
+AADD10PORT=$(sed -n 10p /tmp/guild_list3 | awk '{print $2}')
 
 cat <<EOF > $CNODE_HOME/files/guildnet-topology.json
 { "resultcode": "201", "networkMagic": "764824073", "ipType":4, "Producers": [
@@ -44,7 +48,9 @@ cat <<EOF > $CNODE_HOME/files/guildnet-topology.json
   { "addr": "$AADD5", "port": $AADD5PORT, "valency": 1, "distance":10 },
   { "addr": "$AADD6", "port": $AADD6PORT, "valency": 1, "distance":10 },
   { "addr": "$AADD7", "port": $AADD7PORT, "valency": 1, "distance":10 },
-  { "addr": "$AADD8", "port": $AADD8PORT, "valency": 1, "distance":10 }
+  { "addr": "$AADD8", "port": $AADD8PORT, "valency": 1, "distance":10 },
+  { "addr": "$AADD9", "port": $AADD9PORT, "valency": 1, "distance":10 },
+  { "addr": "$AADD10", "port": $AADD10PORT, "valency": 1, "distance":10 }
 ] }
 EOF
 
