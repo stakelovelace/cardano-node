@@ -50,7 +50,7 @@ elif [[ "$NETWORK" == "allegra" ]]; then
   && export CONFIG="$CNODE_HOME/priv/files/allegra-config.json" \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guildnet" ]]; then
-  export TOPOLOGY="$CNODE_HOME/priv/files/guildnet-topology.json" \
+  export TOPOLOGY="$CNODE_HOME/files/guildnet-topology.json" \
   && export CONFIG="${CNODE_HOME}/files/config.json" \
   && sudo bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1 \
   && exec $CNODE_HOME/scripts/cnode.sh
