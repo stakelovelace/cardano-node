@@ -9,17 +9,24 @@
 
 
 
-Small slant: 6
+Small slant: 8
 
-Big: 4
+Big: 3
 
 Cybermedium: 3
+
+Small shadow: 2
 
 Tinker-Toy: 1
 
 
+
+
+Jesse:
+1. Smol slant 2. Smol shadow
+
 Chris:
-Cybermedium - Big 
+1. Small slant  2. Cybermedium 3. Small shadow
 
 Markus:
 Small slant
