@@ -1,0 +1,59 @@
+
+  _____     _ __   __  ____                    __             
+ / ___/_ __(_) /__/ / / __ \___  ___ _______ _/ /____  _______
+/ (_ / // / / / _  / / /_/ / _ \/ -_) __/ _ `/ __/ _ \/ __(_-<
+\___/\_,_/_/_/\_,_/  \____/ .__/\__/_/  \_,_/\__/\___/_/ /___/
+                         /_/ 
+                         
+
+
+
+
+Small slant: 8
+
+Big: 3
+
+Cybermedium: 3
+
+Small shadow: 2
+
+Tinker-Toy: 1
+
+
+
+
+Jesse:
+1. Smol slant 2. Smol shadow
+
+Chris:
+1. Small slant  2. Cybermedium 3. Small shadow
+
+Markus:
+Small slant
+
+Homer:
+Cybermedium
+
+Red:
+Small slant - Tinker-Toy
+
+Pryiank:
+Small slant
+
+psychomb:
+Big or small slant
+
+Ola:
+1: small slant 2: Big
+
+Adam:
+Big, cyber medium, small slant
+
+MENU
+Availbles tools:
+- cntools
+- gLiveView
+- cncli
+  
+   
+   
