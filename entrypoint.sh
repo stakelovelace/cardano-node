@@ -15,8 +15,9 @@ head -n 8 ~/.banner.txt
 
 echo "NETWORK: $NETWORK $POOL_NAME";
 
-export CNODE_HOME=/opt/cardano/cnode
-export CNODE_PORT=6000
+[[ -z "${CNODE_HOME}" ]] && export CNODE_HOME=/opt/cardano/cnode 
+[[ -z "${CNODE_PORT}" ]] && export CNODE_PORT=6000
+
 
 echo "NODE: $HOSTNAME - Port:$CNODE_PORT - $POOL_NAME";
 cardano-node --version;
