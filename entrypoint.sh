@@ -24,7 +24,7 @@ cardano-node --version;
 
 sudo touch /etc/crontab /etc/cron.*/*
 sudo cron  > /dev/null 2>&1
-#sudo /etc/init.d/promtail start > /dev/null 2>&1
+sudo /etc/init.d/promtail start > /dev/null 2>&1
 
 dbsize=$(du -s ${CNODE_HOME}/db | awk '{print $1}')
 bksizedb=$(du -s $CNODE_HOME/priv/$NETWORK-db 2>/dev/null | awk '{print $1}')
@@ -33,9 +33,10 @@ if [[ "$dbsize" -lt "$bksizedb" ]]; then
 cp -rf $CNODE_HOME/priv/$NETWORK-db/* ${CNODE_HOME}/db 2>/dev/null
 fi
 
-
 # EKG Exposed
-#socat -d tcp-listen:12782,reuseaddr,fork tcp:127.0.0.1:12781 
+if [[ "$EKG" == "Y" ]]; then
+socat -d tcp-listen:12782,reuseaddr,fork tcp:127.0.0.1:12781 
+fi
 
 if [[ "$NETWORK" == "mainnet" ]]; then
   export TOPOLOGY="$CNODE_HOME/priv/files/mainnet-topology.json" \
