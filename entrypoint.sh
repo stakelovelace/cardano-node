@@ -31,7 +31,7 @@ cp -rf $CNODE_HOME/priv/$NETWORK-db/* ${CNODE_HOME}/db 2>/dev/null
 fi
 
 if [[ "$dbsize" -gt "$bksizedb" ]] && [[ $HOSTNAME == AAA10 ]]; then
-cp -rf ${CNODE_HOME}/db/* $CNODE_HOME/priv/$NETWORK-db/ 2>/dev/null
+cp -rf $CNODE_HOME/db/* $CNODE_HOME/priv/$NETWORK-db/ 2>/dev/null
 fi
 
 # EKG Exposed
