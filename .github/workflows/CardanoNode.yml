@@ -10,7 +10,7 @@ jobs:
     - name: docker login
       run: |
         docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}  
-    - name: dockerfile Stage2 Download
+    - name: dockerfile Download
       run: |
         curl -sLo Dockerstage3 https://raw.githubusercontent.com/stakelovelace/cardano-node/master/Dockerfile
     - name: Compiling new node software
