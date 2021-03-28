@@ -50,7 +50,7 @@ elif [[ "$NETWORK" == "testnet" ]]; then
 elif [[ "$NETWORK" == "guild-mainnet" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n mainnet -t cnode -s -f > /dev/null 2>&1 \
   && bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1 \
-  && export TOPOLOGY="/opt/cardano/cnode/files/guildnet-topology.json" \
+  && export TOPOLOGY="${CNODE_HOME}/files/guildnet-topology.json" \
   && find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/127.0.0.1/0.0.0.0/g' > /dev/null 2>&1 \
   && find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/\"TraceMempool\": true/\"TraceMempool\": false/g' > /dev/null 2>&1 \
   && find /opt/cardano/cnode -name "cntools.config" -print0 | xargs -0 sed -i 's/ENABLE_CHATTR=true/ENABLE_CHATTR=false/g' > /dev/null 2>&1 \
