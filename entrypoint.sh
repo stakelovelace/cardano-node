@@ -12,7 +12,7 @@ head -n 8 ~/.scripts/banner.txt
 
 . ~/.bashrc > /dev/null 2>&1
 
-echo "NETWORK: $NETWORK $POOL_NAME";
+echo "NETWORK: $NETWORK $POOL_NAME $TOPOLOGY";
 
 [[ -z "${CNODE_HOME}" ]] && export CNODE_HOME=/opt/cardano/cnode 
 [[ -z "${CNODE_PORT}" ]] && export CNODE_PORT=6000
