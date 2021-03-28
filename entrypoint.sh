@@ -8,7 +8,6 @@ trap 'killall -s SIGTERM cardano-node' SIGINT SIGTERM
 # "docker run --init" to enable the docker init proxy
 # To manually test: docker kill -s SIGTERM container
 
-
 head -n 8 ~/.banner.txt
 
 . ~/.bashrc > /dev/null 2>&1
@@ -22,8 +21,6 @@ echo "NETWORK: $NETWORK $POOL_NAME";
 echo "NODE: $HOSTNAME - Port:$CNODE_PORT - $POOL_NAME";
 cardano-node --version;
 
-sudo touch /etc/crontab /etc/cron.*/*
-sudo cron  > /dev/null 2>&1
 sudo /etc/init.d/promtail start > /dev/null 2>&1
 
 dbsize=$(du -s ${CNODE_HOME}/db | awk '{print $1}')
@@ -46,21 +43,15 @@ if [[ "$NETWORK" == "mainnet" ]]; then
 elif [[ "$NETWORK" == "testnet" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n testnet -t cnode -s -f > /dev/null 2>&1 \
   && exec $CNODE_HOME/scripts/cnode.sh
-elif [[ "$NETWORK" == "launchpad" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n launchpad -t cnode -s -f > /dev/null 2>&1 \
-  && exec $CNODE_HOME/scripts/cnode.sh
-elif [[ "$NETWORK" == "staging" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n staging -t cnode -s -f > /dev/null 2>&1 \
-  && exec $CNODE_HOME/scripts/cnode.sh
-elif [[ "$NETWORK" == "guild" ]]; then
+elif [[ "$NETWORK" == "guild-mainnet" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n mainnet -t cnode -s -f > /dev/null 2>&1 \
   && sudo bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1 \
   && exec $CNODE_HOME/scripts/cnode.sh
-elif [[ "$NETWORK" == "guildnet" ]]; then
+elif [[ "$NETWORK" == "guild" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n guild -t cnode -s -f > /dev/null 2>&1 \
   && exec $CNODE_HOME/scripts/cnode.sh
 else
-  echo "Please set a NETWORK environment variable to one of: mainnet / testnet / staging / launchpad / guild / guildnet"
+  echo "Please set a NETWORK environment variable to one of: mainnet / testnet / guild / guild-mainnet"
   echo "mount a '$CNODE_HOME/priv/files' volume containing: mainnet-config.json, mainnet-shelley-genesis.json, mainnet-byron-genesis.json, and mainnet-topology.json "
   echo "for active nodes set POOL_DIR environment variable where op.cert, hot.skey and vrf.skey files reside. (usually under '${CNODE_HOME}/priv/pool/$POOL_NAME' ) "
   echo "or just set POOL_NAME environment variable (for default path). "
@@ -68,3 +59,4 @@ fi
 
 find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/127.0.0.1/0.0.0.0/g' 2> /dev/null 
 find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/\"TraceMempool\": true/\"TraceMempool\": false/g' 2> /dev/null 
+find /opt/cardano/cnode -name "cntools.config" -print0 | xargs -0 sed -i 's/ENABLE_CHATTR=true/ENABLE_CHATTR=false/g' 2> /dev/null 
