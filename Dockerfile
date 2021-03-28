@@ -48,7 +48,7 @@ RUN chmod a+x /etc/init.d/promtail && chmod 0644 /etc/cron.d/crontab && touch /v
 
 # from https://github.com/grafana/loki/releases
 RUN cd /usr/local/bin \
-&& curl -fSL -o promtail.gz "https://github.com/grafana/loki/releases/download/v1.5.0/promtail-linux-amd64.zip" \
+&& curl -fSL -o promtail.gz "https://github.com/grafana/loki/releases/download/v2.2.0/promtail-linux-amd64.zip" \
 && gunzip promtail.gz \
 && chmod a+x promtail 
 
