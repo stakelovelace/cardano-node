@@ -1,7 +1,9 @@
 name: Docker Image Cardano Node
-
-on: workflow_dispatch
-
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'Dockerfile'
 jobs:
   build:
     runs-on: ubuntu-latest
