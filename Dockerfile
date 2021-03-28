@@ -95,11 +95,11 @@ RUN /nix/var/nix/profiles/per-user/guild/profile/bin/nix-env -i python3 systemd 
     && sudo rm /nix/var/nix/profiles/per-user/guild/profile/bin/nix-*
 
 # ENTRY SCRIPT
-ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/banner.txt /home/guild/.banner.txt
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/ip2loc.sh /home/guild/.scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/guild-topology.sh /home/guild/.scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/block_watcher.sh /home/guild/.scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/healthcheck.sh /home/guild/.scripts/
+ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/banner.txt /home/guild/.scripts/
 ADD https://raw.githubusercontent.com/cardano-community/guild-operators/alpha/scripts/cnode-helper-scripts/prereqs.sh /opt/cardano/cnode/scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh ./entrypoint.sh
 RUN sudo chown -R guild:guild  /home/guild/.scripts/*.sh \
