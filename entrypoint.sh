@@ -36,7 +36,7 @@ fi
 
 # EKG Exposed
 if [[ "$EKG" == "Y" ]]; then
-socat -d tcp-listen:12782,reuseaddr,fork tcp:127.0.0.1:12781 
+socat -d tcp-listen:12782,reuseaddr,fork tcp:127.0.0.1:12788 
 fi
 
 export UPDATE_CHECK='N'
