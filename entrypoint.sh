@@ -36,7 +36,7 @@ fi
 
 # EKG Exposed
 if [[ "$EKG" == "Y" ]]; then
-socat -d tcp-listen:12782,reuseaddr,fork tcp:127.0.0.1:12788 
+#socat -d tcp-listen:12782,reuseaddr,fork tcp:127.0.0.1:12788 
 fi
 
 export UPDATE_CHECK='N'
@@ -54,6 +54,7 @@ elif [[ "$NETWORK" == "guild-mainnet" ]]; then
   && find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/127.0.0.1/0.0.0.0/g' > /dev/null 2>&1 \
   && find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/\"TraceMempool\": true/\"TraceMempool\": false/g' > /dev/null 2>&1 \
   && find /opt/cardano/cnode -name "cntools.config" -print0 | xargs -0 sed -i 's/ENABLE_CHATTR=true/ENABLE_CHATTR=false/g' > /dev/null 2>&1 \
+  && find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/\"hasEKG\": 12788,/\"hasEKG\": [\n    \"0.0.0.0\",\n    12788\n],/g' > /dev/null 2>&1 \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n guild -t cnode -s -f > /dev/null 2>&1 \
