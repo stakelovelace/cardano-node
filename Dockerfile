@@ -22,7 +22,7 @@ RUN  apt-get update \
 # COPY NODE BINS AND DEPS 
 COPY --from=stakelovelace/cardano-htn:stage2 /root/.cabal/bin/* /usr/local/bin/
 COPY --from=stakelovelace/cardano-htn:stage2 /root/bin/* /usr/local/bin/
-COPY --from=stakelovelace/cardano-htn:stage2 /root/git/* /usr/local/bin/
+COPY --from=stakelovelace/cardano-htn:stage2 /root/git/cncli/target/release/cncli /usr/local/bin/
 COPY --from=stakelovelace/cardano-htn:stage2 /opt/ /opt/
 
 RUN chmod a+x /usr/local/bin/* && mkdir -p $CNODE_HOME/priv/files 
@@ -75,7 +75,6 @@ RUN echo "head -n 8 ~/.scripts/banner.txt" >> ~/.bashrc \
     && echo "alias env=/usr/bin/env" >> ~/.bashrc \
     && echo "alias cntools=$CNODE_HOME/scripts/cntools.sh" >> ~/.bashrc \
     && echo "alias gLiveView=$CNODE_HOME/scripts/gLiveView.sh" >> ~/.bashrc \
-    && echo "alias cnclis=$CNODE_HOME/scripts/cncli.sh" >> ~/.bashrc \
     && echo "export PATH=/opt/cardano/cnode/scripts:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/home/guild/.cabal/bin"  >> ~/.bashrc
 
 # ENTRY Scripts
