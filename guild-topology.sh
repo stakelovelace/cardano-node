@@ -46,5 +46,3 @@ cat <<EOF > $CNODE_HOME/files/guildnet-topology.json
   { "addr": "$AADD8", "port": $AADD8PORT, "valency": 1, "distance":10 }
 ] }
 EOF
-
-rm  /tmp/fastest_guild.list && rm /tmp/guild_list*
