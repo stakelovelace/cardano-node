@@ -41,10 +41,14 @@ curl https://gist.githubusercontent.com/karknu/b14ae0b965227c36d770bd6e05f95ab5/
 curl https://gist.githubusercontent.com/karknu/752bba3aa2e8281645b93709da44173c/raw/03967ee72bfd70695c2c18e5e8f0a981dc0af86f/p2pbp_topology.json -o p2pbp_topology.json
 }
 
+p2p
+
 poolreaysetup () {
 sed -i 's/\"1.1.1.1\", \"port\": 3001/\"92.204.53.48\", \"port\": 5401/g'  /opt/cardano/cnode/files/p2pbp_topology.json
 sed -i 's/\"1.1.1.2\", \"port\": 3001/\"92.204.53.48\", \"port\": 5400/g'  /opt/cardano/cnode/files/p2pbp_topology.json
 }
+
+poolreaysetup
 
 # Customisation 
 customise () {
@@ -61,8 +65,7 @@ if [[ "$NETWORK" == "mainnet" ]]; then
   customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "testnet" ]]; then
-  p2p \
-  && customise \
+  customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n guild -t cnode -s -f -w > /dev/null 2>&1 \
