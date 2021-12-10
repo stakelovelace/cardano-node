@@ -14,8 +14,11 @@ head -n 8 ~/.scripts/banner.txt
 
 echo "NETWORK: $NETWORK $POOL_NAME $TOPOLOGY";
 
+
+
 [[ -z "${CNODE_HOME}" ]] && export CNODE_HOME=/opt/cardano/cnode 
 [[ -z "${CNODE_PORT}" ]] && export CNODE_PORT=6000
+
 
 
 echo "NODE: $HOSTNAME - Port:$CNODE_PORT - $POOL_NAME";
@@ -41,6 +44,11 @@ curl https://gist.githubusercontent.com/karknu/752bba3aa2e8281645b93709da44173c/
 patch -p0 < p2p.diff
 }
 
+poolreaysetup () {
+sed -i 's/\"1.1.1.1\", \"port\": 3001/\"92.204.53.48\", \"port\": 5401/g'  /opt/cardano/cnode/files/p2pbp_topology.json
+sed -i 's/\"1.1.1.2\", \"port\": 3001/\"92.204.53.48\", \"port\": 5400/g'  /opt/cardano/cnode/files/p2pbp_topology.json
+}
+
 # Customisation 
 customise () {
 find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/127.0.0.1/0.0.0.0/g' > /dev/null 2>&1 
@@ -56,6 +64,7 @@ if [[ "$NETWORK" == "mainnet" ]]; then
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "testnet" ]]; then
   p2p \
+  && if [  ${POOL_NAME} ]; then  poolreaysetup; export TOPOLOGY="${CNODE_HOME}/files/p2pbp_topology.json fi \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild-mainnet" ]]; then
