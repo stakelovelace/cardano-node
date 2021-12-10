@@ -54,6 +54,7 @@ find /opt/cardano/cnode/files -name "*config*.json" -print0 | xargs -0 sed -i 's
 return 0
 }
 
+if [  ${POOL_NAME} ]; then  poolreaysetup; fi
 export UPDATE_CHECK='N'
 
 if [[ "$NETWORK" == "mainnet" ]]; then
@@ -61,7 +62,6 @@ if [[ "$NETWORK" == "mainnet" ]]; then
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "testnet" ]]; then
   p2p \
-  && if [  ${POOL_NAME} ]; then  poolreaysetup; export TOPOLOGY=${CNODE_HOME}/files/p2pbp_topology.json fi \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild" ]]; then
