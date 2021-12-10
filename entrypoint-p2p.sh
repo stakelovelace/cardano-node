@@ -61,7 +61,7 @@ if [[ "$NETWORK" == "mainnet" ]]; then
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "testnet" ]]; then
   p2p \
-  && if [  ${POOL_NAME} ]; then  poolreaysetup; export TOPOLOGY="${CNODE_HOME}/files/p2pbp_topology.json fi \
+  && if [  ${POOL_NAME} ]; then  poolreaysetup; export TOPOLOGY=${CNODE_HOME}/files/p2pbp_topology.json fi \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild" ]]; then
@@ -69,8 +69,5 @@ elif [[ "$NETWORK" == "guild" ]]; then
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 else
-  echo "Please set a NETWORK environment variable to one of: mainnet / testnet / guild / guild-mainnet"
-  echo "mount a '$CNODE_HOME/priv/files' volume containing: mainnet-config.json, mainnet-shelley-genesis.json, mainnet-byron-genesis.json, and mainnet-topology.json "
-  echo "for active nodes set POOL_DIR environment variable where op.cert, hot.skey and vrf.skey files reside. (usually under '${CNODE_HOME}/priv/pool/$POOL_NAME' ) "
-  echo "or just set POOL_NAME environment variable (for default path). "
+  echo "or just set POOL_NAME environment variable (for default path)."
 fi
