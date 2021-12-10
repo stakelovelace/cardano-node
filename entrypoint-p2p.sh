@@ -39,7 +39,6 @@ curl https://gist.githubusercontent.com/karknu/8c4898f8f0adaad59930ad6df932ea04/
 curl https://gist.githubusercontent.com/karknu/b14ae0b965227c36d770bd6e05f95ab5/raw/c07e321d881d902340520cae6952c9822e962452/p2prelay_topology.json -o p2prelay_topology.json
 curl https://gist.githubusercontent.com/karknu/752bba3aa2e8281645b93709da44173c/raw/03967ee72bfd70695c2c18e5e8f0a981dc0af86f/p2pbp_topology.json -o p2pbp_topology.json
 patch -p0 < p2p.diff
-mv p2prelay_topology.json topology.json
 }
 
 # Customisation 
