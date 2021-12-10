@@ -33,15 +33,12 @@ bksizedb=$(du -s $CNODE_HOME/priv/$NETWORK-db 2>/dev/null | awk '{print $1}')
 # p2p cfg 
 p2p () {
 cd /opt/cardano/cnode/files
-wget https://hydra.iohk.io/build/7654130/download/1/testnet-config.json
 wget https://hydra.iohk.io/build/7654130/download/1/testnet-byron-genesis.json
 wget https://hydra.iohk.io/build/7654130/download/1/testnet-shelley-genesis.json
 wget https://hydra.iohk.io/build/7654130/download/1/testnet-alonzo-genesis.json
 wget https://hydra.iohk.io/build/7654130/download/1/testnet-topology.json
-curl https://gist.githubusercontent.com/karknu/8c4898f8f0adaad59930ad6df932ea04/raw/53c3f47f92ada8f21072c450b286592aa7423fda/p2pconfig.diff -o p2p.diff
 curl https://gist.githubusercontent.com/karknu/b14ae0b965227c36d770bd6e05f95ab5/raw/c07e321d881d902340520cae6952c9822e962452/p2prelay_topology.json -o p2prelay_topology.json
 curl https://gist.githubusercontent.com/karknu/752bba3aa2e8281645b93709da44173c/raw/03967ee72bfd70695c2c18e5e8f0a981dc0af86f/p2pbp_topology.json -o p2pbp_topology.json
-patch -p0 < p2p.diff
 }
 
 poolreaysetup () {
@@ -65,12 +62,6 @@ if [[ "$NETWORK" == "mainnet" ]]; then
 elif [[ "$NETWORK" == "testnet" ]]; then
   p2p \
   && if [  ${POOL_NAME} ]; then  poolreaysetup; export TOPOLOGY="${CNODE_HOME}/files/p2pbp_topology.json fi \
-  && customise \
-  && exec $CNODE_HOME/scripts/cnode.sh
-elif [[ "$NETWORK" == "guild-mainnet" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n mainnet -t cnode -s -f -w > /dev/null 2>&1 \
-  && bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1 \
-  && export TOPOLOGY="${CNODE_HOME}/files/guildnet-topology.json" \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild" ]]; then
