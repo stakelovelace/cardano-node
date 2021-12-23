@@ -56,7 +56,7 @@ elif [[ "$NETWORK" == "guild-mainnet" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n mainnet -t cnode -s -f -w > /dev/null 2>&1 \
   && bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1 \
   && export TOPOLOGY="${CNODE_HOME}/files/guildnet-topology.json" \
-  && customise \
+  && customise > /dev/null 2>&1 \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n guild -t cnode -s -f -w > /dev/null 2>&1 \
