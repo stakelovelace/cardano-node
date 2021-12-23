@@ -31,11 +31,12 @@ AADD8PORT=$(sed -n 8p /tmp/guild_list1 | awk '{print $2}')
 cat <<EOF > $CNODE_HOME/files/guildnet-topology.json
 { "resultcode": "201", "networkMagic": "764824073", "ipType":4, "Producers": [
   { "addr": "relays-new.cardano-mainnet.iohk.io", "port": 3001, "valency": 2, "distance":10 },
-  { "addr": "172.31.0.51", "port": 6000, "valency": 3, "distance":10 },
-  { "addr": "172.13.0.63", "port": 6000, "valency": 3, "distance":10 },
-  { "addr": "78.47.99.41", "port": 6000, "valency": 2, "distance":10 },
-  { "addr": "168.119.51.182", "port": 6000, "valency": 2, "distance":10 },
-  { "addr": "95.216.207.178", "port": 6000, "valency": 2, "distance":10 },
+  { "addr": "148.72.153.168", "port": 16000, "valency": 1, "distance":10 },
+  { "addr": "148.72.153.168", "port": 8000, "valency": 2, "distance":10 },
+  { "addr": "78.47.99.41", "port": 6000, "valency": 1, "distance":10 },
+  { "addr": "168.119.51.182", "port": 6000, "valency": 1, "distance":10 },
+  { "addr": "95.216.207.178", "port": 6000, "valency": 1, "distance":10 },
+  { "addr": "85.25.105.92", "port": 6000, "valency": 2, "distance":10 },
   { "addr": "$AADD1", "port": $AADD1PORT, "valency": 1, "distance":10 },
   { "addr": "$AADD2", "port": $AADD2PORT, "valency": 1, "distance":10 },
   { "addr": "$AADD3", "port": $AADD3PORT, "valency": 1, "distance":10 },
