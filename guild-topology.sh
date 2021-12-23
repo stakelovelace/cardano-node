@@ -4,7 +4,7 @@ export CNODE_HOME=/opt/cardano/cnode
 
 curl -s -k -o /tmp/guild_topology2.json "https://api.clio.one/htopology/v1/fetch/?max=20"
 
-cat /tmp/guild_topology2.json | grep -v "148.72.153.168" | grep -v "173.224.124.85" | grep -v "62.138.3.118" | grep -v "85.25.159.219" | grep -v "85.25.159.221" | grep -v "85.25.105.92" | awk '{print $3,$5}' | tail -n +2 | sed s/"\","//g  | sed s/"\""//g | sed s/","//g >  /tmp/guild_list1              
+cat /tmp/guild_topology2.json | grep -v "148.72.153.168" | grep -v "194.233.79.155" | grep -v "173.224.124.85" | grep -v "62.138.3.118" | grep -v "85.25.159.219" | grep -v "85.25.159.221" | grep -v "85.25.105.92" | awk '{print $3,$5}' | tail -n +2 | sed s/"\","//g  | sed s/"\""//g | sed s/","//g >  /tmp/guild_list1              
 
 # TCPPING metrics disabled
 #IFS=$'\n'; for i in $(cat /tmp/guild_list1 ); do sudo tcpping -x 1 $i | grep ms | awk '{print $9,$7}' >> /tmp/guild_list2 ; done
@@ -37,6 +37,7 @@ cat <<EOF > $CNODE_HOME/files/guildnet-topology.json
   { "addr": "168.119.51.182", "port": 6000, "valency": 1, "distance":10 },
   { "addr": "95.216.207.178", "port": 6000, "valency": 1, "distance":10 },
   { "addr": "85.25.105.92", "port": 6000, "valency": 2, "distance":10 },
+  { "addr": "194.233.79.155", "port": 6000, "valency": 1, "distance":10 },
   { "addr": "$AADD1", "port": $AADD1PORT, "valency": 1, "distance":10 },
   { "addr": "$AADD2", "port": $AADD2PORT, "valency": 1, "distance":10 },
   { "addr": "$AADD3", "port": $AADD3PORT, "valency": 1, "distance":10 },
