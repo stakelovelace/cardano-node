@@ -44,9 +44,14 @@ return 0
 
 export UPDATE_CHECK='N'
 
+if [ /opt/cardano/cnode/files/topology.json ]; then 
+  echo "topology exist";
+else
+  $CNODE_HOME/scripts/prereqs.sh -n mainnet -t cnode -s -f -w > /dev/null 2>&1 
+fi
+  
 if [[ "$NETWORK" == "mainnet" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n mainnet -t cnode -s -f -w > /dev/null 2>&1 \
-  && customise \
+  customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "testnet" ]]; then
   $CNODE_HOME/scripts/prereqs.sh -n testnet -t cnode -s -f -w > /dev/null 2>&1 \
