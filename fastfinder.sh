@@ -1,3 +1,29 @@
+
+if [[ ! $FASTTOPO ]] ; then
+echo "To activate this script do:";
+echo "export FASTTOPO=y";
+echo -e "\n";
+echo "in addition choose the Country or the Continent";
+echo "export COUNTRY=auto";
+echo "export CONTINENT=auto";
+echo -e "\n";
+echo "example with auto discovery";
+echo "export COUNTRY=auto; bash fastfinder.sh"
+echo "export CONTINENT=auto; bash fastfinder.sh"
+echo -e "\n";
+echo "example with auto discovery";
+echo "export CONTINENT=auto; export CONTINENT=auto; bash fastfinder.sh"
+echo -e "\n";
+echo "example with specific Country";
+echo "export COUNTRY=FR; bash fastfinder.sh"
+echo -e "\n";
+echo "example with specific Continent";
+echo "export CONTINENT=America; bash fastfinder.sh"
+echo -e "\n";
+echo "example with specific Continent and Country";
+echo "export CONTINENT=Europe; export CONTINENT=NL; bash fastfinder.sh"
+fi
+
 if [[ $FASTTOPO ]] ; then 
 
 wget -O dwtopology.json https://explorer.cardano.org/relays/topology.json > /dev/null 2>&1
@@ -62,6 +88,7 @@ IFS=$'\n'; for i in $(cat /tmp/guild_list4); do echo "$i," >> guildnet-topology.
 echo -e "{\"addr\": \"relays-new.cardano-mainnet.iohk.io\", \"port\": 3001, \"state\":\"IOHK\", \"valency\": 2} \\n] }" >> guildnet-topology.json1
 cat guildnet-topology.json1 | jq > topology.json
 
+ls -l topology.json;
 cat  topology.json | jq -c '.[][]' | wc -l
 
 rm  IOHK.topo /tmp/guild_list* guildnet-topology.json1 dwtopology.json
