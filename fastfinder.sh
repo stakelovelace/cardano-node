@@ -8,20 +8,20 @@ echo "export COUNTRY=auto";
 echo "export CONTINENT=auto";
 echo -e "\n";
 echo "example with auto discovery";
-echo "export COUNTRY=auto; bash fastfinder.sh"
-echo "export CONTINENT=auto; bash fastfinder.sh"
+echo "export COUNTRY=auto;  fastfinder.sh"
+echo "export CONTINENT=auto;  fastfinder.sh"
 echo -e "\n";
 echo "example with auto discovery";
-echo "export CONTINENT=auto; export CONTINENT=auto; bash fastfinder.sh"
+echo "export CONTINENT=auto; export CONTINENT=auto; fastfinder.sh"
 echo -e "\n";
 echo "example with specific Country";
-echo "export COUNTRY=FR; bash fastfinder.sh"
+echo "export COUNTRY=FR;  fastfinder.sh"
 echo -e "\n";
 echo "example with specific Continent";
-echo "export CONTINENT=America; bash fastfinder.sh"
+echo "export CONTINENT=America;  fastfinder.sh"
 echo -e "\n";
 echo "example with specific Continent and Country";
-echo "export CONTINENT=Europe; export CONTINENT=NL; bash fastfinder.sh"
+echo "export CONTINENT=Europe; export CONTINENT=NL; fastfinder.sh"
 fi
 
 if [[ $FASTTOPO ]] ; then 
