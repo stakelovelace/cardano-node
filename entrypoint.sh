@@ -21,18 +21,18 @@ echo "NETWORK: $NETWORK $POOL_NAME $TOPOLOGY";
 echo "NODE: $HOSTNAME - Port:$CNODE_PORT - $POOL_NAME";
 cardano-node --version;
 
-sudo /etc/init.d/promtail start > /dev/null 2>&1
+# sudo /etc/init.d/promtail start > /dev/null 2>&1
 
-dbsize=$(du -s ${CNODE_HOME}/db | awk '{print $1}')
-bksizedb=$(du -s $CNODE_HOME/priv/$NETWORK-db 2>/dev/null | awk '{print $1}')
+# dbsize=$(du -s ${CNODE_HOME}/db | awk '{print $1}')
+# bksizedb=$(du -s $CNODE_HOME/priv/$NETWORK-db 2>/dev/null | awk '{print $1}')
 
-if [[ "$dbsize" -lt "$bksizedb" ]]; then
-cp -rf $CNODE_HOME/priv/$NETWORK-db/* ${CNODE_HOME}/db 2>/dev/null
-fi
+# if [[ "$dbsize" -lt "$bksizedb" ]]; then
+# cp -rf $CNODE_HOME/priv/$NETWORK-db/* ${CNODE_HOME}/db 2>/dev/null
+# fi
 
-if [[ "$dbsize" -gt "$bksizedb" ]] && [[ $HOSTNAME == AAA10 ]]; then
-cp -rf $CNODE_HOME/db/* $CNODE_HOME/priv/$NETWORK-db/ 2>/dev/null
-fi
+# if [[ "$dbsize" -gt "$bksizedb" ]] && [[ $HOSTNAME == AAA10 ]]; then
+# cp -rf $CNODE_HOME/db/* $CNODE_HOME/priv/$NETWORK-db/ 2>/dev/null
+# fi
 
 # Customisation 
 customise () {
