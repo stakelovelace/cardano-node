@@ -12,70 +12,47 @@ ENV \
     LANG=en_US.UTF-8 \
     LANGUAGE=en_US.UTF-8 \
     CNODE_HOME=/opt/cardano/cnode \
-    PATH=/nix/var/nix/profiles/per-user/guild/profile/bin:/nix/var/nix/profiles/per-user/guild/profile/sbin:/opt/cardano/cnode/scripts:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/home/guild/.cabal/bin \
-    GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt 
+    CARDANO_NODE_SOCKET_PATH=$CNODE_HOME/sockets/node0.socket \
+    PATH=/opt/cardano/cnode/scripts:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/home/guild/.local/bin \
+    GIT_SSL_CAINFO=/etc/ssl/certs/ca-certificates.crt
 
-# Install locales package
-RUN  apt-get update \ 
-     && apt-get install --no-install-recommends -y locales apt-utils
-     
-# COPY NODE BINS AND DEPS 
-COPY --from=stakelovelace/cardano-htn:stage2 /root/.cabal/bin/* /usr/local/bin/
-COPY --from=stakelovelace/cardano-htn:stage2 /root/bin/* /usr/local/bin/
-COPY --from=stakelovelace/cardano-htn:stage2 /root/git/cncli/target/release/cncli /usr/local/bin/
-COPY --from=stakelovelace/cardano-htn:stage2 /opt/ /opt/
-
-RUN chmod a+x /usr/local/bin/* && mkdir -p $CNODE_HOME/priv/files 
-
-#  en_US.UTF-8 for inclusion in generation
-RUN sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
+RUN set -x && apt update \
+    && mkdir -p /root/.local/bin \
+    && apt install -y curl wget gnupg apt-utils git udev \
+    && wget https://raw.githubusercontent.com/cardano-community/guild-operators/master/scripts/cnode-helper-scripts/guild-deploy.sh \
+    && export SUDO='N' \
+    && export UPDATE_CHECK='N' \
+    && export SKIP_DBSYNC_DOWNLOAD='Y' \
+    && chmod +x ./guild-deploy.sh &&  ./guild-deploy.sh -b master -s pdcowx \
+    && ls /opt/ \
+    && mkdir -p $CNODE_HOME/priv/files \
+    && apt-get update && apt-get install --no-install-recommends -y locales apt-utils \
+    && sed -i 's/^# *\(en_US.UTF-8\)/\1/' /etc/locale.gen \
     && locale-gen \
     && echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc \
     && echo "export LANG=en_US.UTF-8" >> ~/.bashrc \
-    && echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashrc
-
-# PREREQ --no-install-recommends
-RUN apt-get update && apt-get install -y libcap2 libselinux1 libc6 libsodium-dev ncurses-bin iproute2 curl wget apt-utils xz-utils netbase sudo coreutils dnsutils net-tools procps tcptraceroute bc usbip sqlite3 python3 tmux jq ncurses-base libtool autoconf git wget gnupg tcptraceroute util-linux less openssl \
-    && apt-get install -y --no-install-recommends cron \
-    && sudo apt-get -y purge && sudo apt-get -y clean && sudo apt-get -y autoremove && sudo rm -rf /var/lib/apt/lists/* # && sudo rm -rf /usr/bin/apt*
-    
-ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/promtail.yml /etc/ 
-ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/promtail /etc/init.d/
-ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/crontab /etc/cron.d/crontab
-RUN chmod a+x /etc/init.d/promtail && chmod 0644 /etc/cron.d/crontab && touch /var/log/cron.log 
-
-# from https://github.com/grafana/loki/releases
-RUN cd /usr/local/bin \
-&& curl -fSL -o promtail.gz "https://github.com/grafana/loki/releases/download/v1.5.0/promtail-linux-amd64.zip" \
-&& gunzip promtail.gz \
-&& chmod a+x promtail && ls /opt/
-
-RUN wget https://github.com/javadmohebbi/IP2Location/raw/master/dist/linux/amd64/ip2location \
-&& mv ip2location /usr/local/bin/ -v \
-&& chmod a+x /usr/local/bin/ip2location -v \
-&& /usr/local/bin/ip2location -dl \
-&& setcap cap_net_raw=+ep /usr/local/bin/ip2location
-
-RUN cd /usr/bin \
-&& sudo wget http://www.vdberg.org/~richard/tcpping \
-&& sudo chmod 755 tcpping 
-
-# SETUP Guild USER 
-RUN adduser --disabled-password --gecos '' guild \
-&& echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
-&& adduser guild sudo \ 
-&& chown -R guild:guild /home/guild/.*
+    && echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashr \
+    && apt-get install -y procps libsecp256k1-0 libcap2 libselinux1 libc6 libsodium-dev ncurses-bin iproute2 curl wget apt-utils xz-utils netbase sudo coreutils dnsutils net-tools procps tcptraceroute bc usbip sqlite3 python3 tmux jq ncurses-base libtool autoconf git gnupg tcptraceroute util-linux less openssl bsdmainutils dialog vim \
+    && apt-get -y remove libpq-dev build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ && apt-get -y purge && apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* \
+    && cd /usr/bin \
+    && wget http://www.vdberg.org/~richard/tcpping \
+    && chmod 755 tcpping \
+    && adduser --disabled-password --gecos '' guild \
+    && echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers \
+    && adduser guild sudo 
 
 USER guild
 WORKDIR /home/guild
 
-# INSTALL NIX
-RUN echo "head -n 8 ~/.scripts/banner.txt" >> ~/.bashrc \
-    && echo "grep MENU -A 6 ~/.scripts/banner.txt | grep -v MENU" >> ~/.bashrc \
+# Commit Version
+RUN  curl -sL -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" https://api.github.com/repos/cardano-community/guild-operators/commits | grep -v md | grep -A 2 guild-deploy.sh | grep sha | head -n 1 | cut -d "\"" -f 4 > ~/guild-latest.txt \
+    && echo "head -n 8 /home/guild/.scripts/banner.txt" >> ~/.bashrc \
+    && echo "grep MENU -A 6 /home/guild/.scripts/banner.txt | grep -v MENU" >> ~/.bashrc \
     && echo "alias env=/usr/bin/env" >> ~/.bashrc \
     && echo "alias cntools=$CNODE_HOME/scripts/cntools.sh" >> ~/.bashrc \
     && echo "alias gLiveView=$CNODE_HOME/scripts/gLiveView.sh" >> ~/.bashrc \
-    && echo "export PATH=/opt/cardano/cnode/scripts:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/home/guild/.cabal/bin"  >> ~/.bashrc
+    && echo "export PATH=/opt/cardano/cnode/scripts:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/home/guild/.local/bin"  >> ~/.bashrc 
+
 
 # ENTRY Scripts
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/banner.txt /home/guild/.scripts/banner.txt
@@ -88,9 +65,11 @@ ADD https://raw.githubusercontent.com/cardano-community/guild-operators/alpha/sc
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh ./entrypoint.sh
 
 RUN sudo chown -R guild:guild $CNODE_HOME/* \
+    && mkdir /home/guild/.local/ \
+    && sudo mv /root/.local/bin /home/guild/.local/ \
     && sudo chown -R guild:guild /home/guild/.* \
-    && sudo chmod a+x /home/guild/.scripts/*.sh /opt/cardano/cnode/scripts/*.sh /home/guild/entrypoint.sh 
-    
+    && sudo chmod a+x /home/guild/.scripts/*.sh /opt/cardano/cnode/scripts/*.sh /home/guild/entrypoint.sh
+
 HEALTHCHECK --start-period=5m --interval=5m --timeout=100s CMD /home/guild/.scripts/healthcheck.sh
 
-ENTRYPOINT ["./entrypoint.sh"] 
+ENTRYPOINT ["./entrypoint.sh"]
