@@ -1,3 +1,7 @@
+FROM cardanosolutions/kupo:latest
+COPY /bin/kupo /bin/kupo
+
+
 FROM debian:stable-slim
 
 LABEL desc="Stakelovelace Cardano Node"
