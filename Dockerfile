@@ -63,6 +63,7 @@ ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/block_wa
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/healthcheck.sh /home/guild/.scripts/
 ADD https://raw.githubusercontent.com/cardano-community/guild-operators/alpha/scripts/cnode-helper-scripts/prereqs.sh /opt/cardano/cnode/scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh ./entrypoint.sh
+ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/kupo.cmd ./kupo.cmd
 
 COPY --from=cardanosolutions/kupo:latest /bin/kupo /bin/kupo
 
