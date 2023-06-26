@@ -1,5 +1,3 @@
-FROM cardanosolutions/kupo:latest AS kupo
-
 FROM debian:stable-slim
 
 LABEL desc="Stakelovelace Cardano Node"
@@ -34,7 +32,7 @@ RUN set -x && apt update \
     && echo "export LC_ALL=en_US.UTF-8" >> ~/.bashrc \
     && echo "export LANG=en_US.UTF-8" >> ~/.bashrc \
     && echo "export LANGUAGE=en_US.UTF-8" >> ~/.bashr \
-    && apt-get install -y procps libsecp256k1-0 libcap2 libselinux1 libc6 libsodium-dev ncurses-bin iproute2 curl wget apt-utils xz-utils netbase sudo coreutils dnsutils net-tools procps tcptraceroute bc usbip sqlite3 python3 tmux jq ncurses-base libtool autoconf git gnupg tcptraceroute util-linux less openssl bsdmainutils dialog vim \
+    && apt-get install -y procps libsecp256k1-1 libcap2 libselinux1 libc6 libsodium-dev ncurses-bin iproute2 curl wget apt-utils xz-utils netbase sudo coreutils dnsutils net-tools procps tcptraceroute bc usbip sqlite3 python3 tmux jq ncurses-base libtool autoconf git gnupg tcptraceroute util-linux less openssl bsdmainutils dialog vim \
     && apt-get -y remove libpq-dev build-essential pkg-config libffi-dev libgmp-dev libssl-dev libtinfo-dev libsystemd-dev zlib1g-dev make g++ && apt-get -y purge && apt-get -y clean && apt-get -y autoremove && rm -rf /var/lib/apt/lists/* \
     && cd /usr/bin \
     && wget http://www.vdberg.org/~richard/tcpping \
@@ -66,13 +64,15 @@ ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/healthch
 ADD https://raw.githubusercontent.com/cardano-community/guild-operators/alpha/scripts/cnode-helper-scripts/prereqs.sh /opt/cardano/cnode/scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh ./entrypoint.sh
 
-COPY --from=kupo /bin/kupo /bin/kupo
+COPY --from=cardanosolutions/kupo:latest /bin/kupo /bin/kupo
 
 RUN sudo chown -R guild:guild $CNODE_HOME/* \
     && mkdir /home/guild/.local/ \
     && sudo mv /root/.local/bin /home/guild/.local/ \
     && sudo chown -R guild:guild /home/guild/.* \
     && sudo chmod a+x /home/guild/.scripts/*.sh /opt/cardano/cnode/scripts/*.sh /home/guild/entrypoint.sh
+
+STOPSIGNAL SIGINT
 
 HEALTHCHECK --start-period=5m --interval=5m --timeout=100s CMD /home/guild/.scripts/healthcheck.sh
 
