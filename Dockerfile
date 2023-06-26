@@ -1,6 +1,4 @@
-FROM cardanosolutions/kupo:latest
-COPY /bin/kupo /bin/kupo
-
+FROM cardanosolutions/kupo:latest AS kupo
 
 FROM debian:stable-slim
 
@@ -67,6 +65,8 @@ ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/block_wa
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/healthcheck.sh /home/guild/.scripts/
 ADD https://raw.githubusercontent.com/cardano-community/guild-operators/alpha/scripts/cnode-helper-scripts/prereqs.sh /opt/cardano/cnode/scripts/
 ADD https://raw.githubusercontent.com/stakelovelace/cardano-node/master/entrypoint.sh ./entrypoint.sh
+
+COPY --from=kupo /bin/kupo /bin/kupo
 
 RUN sudo chown -R guild:guild $CNODE_HOME/* \
     && mkdir /home/guild/.local/ \
