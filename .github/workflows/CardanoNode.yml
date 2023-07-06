@@ -40,10 +40,8 @@ jobs:
 
         # Push the results to a Docker Hub repository description
         repository="stakelovelace/cardano-node"
-        username="${{ secrets.DOCKER_USER }}"
-        password="${{ secrets.DOCKER_PASSWORD }}"
 
-        echo "$result" | docker login -u "$username" --password-stdin
+        echo "$result" | docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
         
         # Copy the scan_results.txt file to the current working directory
         docker run --rm -v "$PWD:/workspace" docker/compose-bin:latest sh -c "cp /workspace/scan_results.txt /compose_results/scan_results.txt"
