@@ -42,12 +42,9 @@ jobs:
 
         # Read the Docker Scout results file
         result=$(cat docker_scout_results.txt)
-
-        # Prepare the issue body with preserved line breaks
-        issue_body=$(sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g' docker_scout_results.txt)
         
         # Publish the results as a GitHub issue
-        gh issue create --title "Docker Scout Results" --body "$issue_body"
+        gh issue create --title "Docker Scout Results" --body "$result"
         
         # Echo the result for debugging (optional)
         echo "$result"
