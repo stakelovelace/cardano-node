@@ -38,12 +38,9 @@ jobs:
 
         # Publish the results as a GitHub issue
         echo "$result" | gh issue create --title "Docker Scout Results" --body -
-
-        # Push the results to a Docker Hub repository description
-        repository="stakelovelace/cardano-node"
-
-        echo "$result" | docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+        echo "$result"
         
-        # Copy the scan_results.txt file to the current working directory
-        docker run --rm -v "$PWD:/workspace" docker/compose-bin:latest sh -c "cp /workspace/scan_results.txt /compose_results/scan_results.txt"
-        docker push "$repository"
+        # Update the Docker Hub repository description
+        api_url="https://hub.docker.com/v2/repositories/${username}/${repository}"
+        access_token=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "${{ secrets.DOCKER_USER }}", "password": "${{ secrets.DOCKER_PASSWORD }}"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
+        curl -s -H "Authorization: JWT $access_token" -H "Content-Type: application/json" -X PATCH -d '{"description": "'"$result"'"}' "$api_url/"
