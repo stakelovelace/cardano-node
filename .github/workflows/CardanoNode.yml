@@ -31,14 +31,14 @@ jobs:
       run: |
         # Run Docker Scout and save the output to a file
         echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
-        echo -e "\n ------ DOCKER SCOUT RESULTS------- \n" > docker_scout_results.txt
-        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
+        echo -e "\n ------ DOCKER SCOUT RESULTS------- \n" >> docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" >> docker_scout_results.txt
         docker scout quickview stakelovelace/cardano-node:latest >> docker_scout_results.txt
-        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" >> docker_scout_results.txt
         docker scout cves stakelovelace/cardano-node:latest >> docker_scout_results.txt
-        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" >> docker_scout_results.txt
         docker scout recommendations stakelovelace/cardano-node:latest >> docker_scout_results.txt
-        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" >> docker_scout_results.txt
 
         # Read the Docker Scout results file
         result=$(cat docker_scout_results.txt)
