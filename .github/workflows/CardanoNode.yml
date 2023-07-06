@@ -14,10 +14,10 @@ jobs:
         docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}  
     - name: Dockerfile Download
       run: |
-        curl -sLo Dockerstage3 https://raw.githubusercontent.com/stakelovelace/cardano-node/master/Dockerfile
+        curl -sLo DockerNode https://raw.githubusercontent.com/stakelovelace/cardano-node/master/Dockerfile
     - name: Compiling new node software
       run: |      
-        docker build . --file Dockerstage3 --compress --tag stakelovelace/cardano-node:latest
+        docker build . --file DockerNode --compress --tag stakelovelace/cardano-node:latest
     - name: Docker push
       run: |
         docker push stakelovelace/cardano-node:latest
@@ -40,7 +40,7 @@ jobs:
 
         # Push the results to a Docker Hub repository description
         repository="stakelovelace/cardano-node"
-        username="${{ secrets.DOCKER_USERNAME }}"
+        username="${{ secrets.DOCKER_USER }}"
         password="${{ secrets.DOCKER_PASSWORD }}"
 
         echo "$result" | docker login -u "$username" --password-stdin
