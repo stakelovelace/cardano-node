@@ -38,7 +38,7 @@ jobs:
         docker scout cves stakelovelace/cardano-node:latest >> docker_scout_results.txt
         echo -e "\n ------------------------------------------------------- \n" >> docker_scout_results.txt
         docker scout recommendations stakelovelace/cardano-node:latest -o docker_scout_results_recc.txt
-        cat docker_scout_results_recc.txt | sed -i 's|───────────────────────────────────────────┼────────────────────────────────────────────┼────────────┼──────────────────────────────||g' >> docker_scout_results.txt
+        sed -i 's|───────────────────────────────────────────┼────────────────────────────────────────────┼────────────┼──────────────────────────────||g' docker_scout_results_recc.txt >> docker_scout_results.txt
         echo -e "\n ------------------------------------------------------- \n" >> docker_scout_results.txt
 
         # Read the Docker Scout results file
