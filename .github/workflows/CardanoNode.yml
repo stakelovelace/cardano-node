@@ -30,17 +30,26 @@ jobs:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         # Run Docker Scout and save the output to a file
-        docker scout quickview stakelovelace/cardano-node:latest -o docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
+        echo -e "\n ------ DOCKER SCOUT RESULTS------- \n" > docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
+        docker scout quickview stakelovelace/cardano-node:latest >> docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
+        docker scout cves stakelovelace/cardano-node:latest >> docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
         docker scout recommendations stakelovelace/cardano-node:latest >> docker_scout_results.txt
+        echo -e "\n ------------------------------------------------------- \n" > docker_scout_results.txt
 
         # Read the Docker Scout results file
         result=$(cat docker_scout_results.txt)
 
         # Publish the results as a GitHub issue
-        echo "$result" | gh issue create --title "Docker Scout Results" --body -
+        gh issue create --title "Docker Scout Results" --body "$(cat docker_scout_results.txt)"
+        
+        # Echo the result for debugging (optional)
         echo "$result"
         
         # Update the Docker Hub repository description
         api_url="https://hub.docker.com/v2/repositories/${username}/${repository}"
         access_token=$(curl -s -H "Content-Type: application/json" -X POST -d '{"username": "${{ secrets.DOCKER_USER }}", "password": "${{ secrets.DOCKER_PASSWORD }}"}' https://hub.docker.com/v2/users/login/ | jq -r .token)
-        curl -s -H "Authorization: JWT $access_token" -H "Content-Type: application/json" -X PATCH -d '{"description": "'"$result"'"}' "$api_url/"
+        curl -s -H "Authorization: JWT $access_token" -H "Content-Type: application/json" -X PATCH -d '{"description": "$result"}' "$api_url/"
