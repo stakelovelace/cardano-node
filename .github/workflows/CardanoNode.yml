@@ -44,5 +44,7 @@ jobs:
         password="${{ secrets.DOCKER_PASSWORD }}"
 
         echo "$result" | docker login -u "$username" --password-stdin
-        docker run --rm -v "$PWD:/workspace" docker/compose:1.29.2 sh -c "echo '$result' > /workspace/scan_results.txt"
+        
+        # Copy the scan_results.txt file to the current working directory
+        docker run --rm -v "$PWD:/workspace" docker/compose-bin:latest sh -c "cp /workspace/scan_results.txt /compose_results/scan_results.txt"
         docker push "$repository"
