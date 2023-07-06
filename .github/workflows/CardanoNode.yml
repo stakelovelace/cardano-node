@@ -26,24 +26,24 @@ jobs:
         curl -fsSL https://raw.githubusercontent.com/docker/scout-cli/main/install.sh -o install-scout.sh
         sh install-scout.sh
     - name: Docker Scout
-          run: |
-            docker scan stakelovelace/cardano-node:latest
+      run: |
+        docker scan stakelovelace/cardano-node:latest
     - name: Handle Docker Scout results
-          run: |
-            # Run Docker Scout and save the output to a file
-            docker scan stakelovelace/cardano-node:latest > docker_scout_results.txt
+      run: |
+        # Run Docker Scout and save the output to a file
+        docker scan stakelovelace/cardano-node:latest > docker_scout_results.txt
 
-            # Read the Docker Scout results file
-            result=$(cat docker_scout_results.txt)
+        # Read the Docker Scout results file
+        result=$(cat docker_scout_results.txt)
 
-            # Publish the results as a GitHub issue
-            echo "$result" | gh issue create --title "Docker Scout Results" --body -
+        # Publish the results as a GitHub issue
+        echo "$result" | gh issue create --title "Docker Scout Results" --body -
 
-            # Push the results to a Docker Hub repository description
-            repository="stakelovelace/cardano-node"
-            username="${{ secrets.DOCKER_USERNAME }}"
-            password="${{ secrets.DOCKER_PASSWORD }}"
+        # Push the results to a Docker Hub repository description
+        repository="stakelovelace/cardano-node"
+        username="${{ secrets.DOCKER_USERNAME }}"
+        password="${{ secrets.DOCKER_PASSWORD }}"
 
-            echo "$result" | docker login -u "$username" --password-stdin
-            docker run --rm -v "$PWD:/workspace" docker/compose:1.29.2 sh -c "echo '$result' > /workspace/scan_results.txt"
-            docker push "$repository"
+        echo "$result" | docker login -u "$username" --password-stdin
+        docker run --rm -v "$PWD:/workspace" docker/compose:1.29.2 sh -c "echo '$result' > /workspace/scan_results.txt"
+        docker push "$repository"
