@@ -45,29 +45,29 @@ return 0
 export UPDATE_CHECK='N'
 
 if [[ "$NETWORK" == "mainnet" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n mainnet -t cnode -s -f > /dev/null 2>&2 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n mainnet -t cnode -s -f > /dev/null 2>&2 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "testnet" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n testnet -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n testnet -t cnode -s -f > /dev/null 2>&1 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "preprod" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n preprod -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n preprod -t cnode -s -f > /dev/null 2>&1 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "preview" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n preview -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n preview -t cnode -s -f > /dev/null 2>&1 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild-mainnet" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n mainnet -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n mainnet -t cnode -s -f > /dev/null 2>&1 \
   && bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1 \
   && export TOPOLOGY="${CNODE_HOME}/files/guildnet-topology.json" \
   && customise > /dev/null 2>&1 \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild" ]]; then
-  $CNODE_HOME/scripts/prereqs.sh -n guild -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n guild -t cnode -s -f > /dev/null 2>&1 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 else
