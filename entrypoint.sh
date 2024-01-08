@@ -26,18 +26,28 @@ cardano-node --version;
 # dbsize=$(du -s ${CNODE_HOME}/db | awk '{print $1}')
 # bksizedb=$(du -s $CNODE_HOME/priv/$NETWORK-db 2>/dev/null | awk '{print $1}')
 
-# if [[ "$dbsize" -lt "$bksizedb" ]]; then
-# cp -rf $CNODE_HOME/priv/$NETWORK-db/* ${CNODE_HOME}/db 2>/dev/null
-# fi
+if [[ "${ENABLE_BACKUP}" == "Y" ]] || [[ "${ENABLE_RESTORE}" == "Y" ]]; then
+    [[ ! -d "${CNODE_HOME}"/backup/$NETWORK-db ]] && mkdir -p $CNODE_HOME/backup/$NETWORK-db
+    dbsize=$(du -s $CNODE_HOME/db | awk '{print $1}')
+    bksizedb=$(du -s $CNODE_HOME/backup/$NETWORK-db 2>/dev/null | awk '{print $1}')
+    if [[ "${ENABLE_RESTORE}" == "Y" ]] && [[ "$dbsize" -lt "$bksizedb" ]]; then
+        echo "Backup Started"
+        cp -rf "${CNODE_HOME}"/backup/"${NETWORK}"-db/* "${CNODE_HOME}"/db 2>/dev/null
+        echo "Backup Finished"
+    fi
 
-# if [[ "$dbsize" -gt "$bksizedb" ]] && [[ $HOSTNAME == AAA10 ]]; then
-# cp -rf $CNODE_HOME/db/* $CNODE_HOME/priv/$NETWORK-db/ 2>/dev/null
-# fi
+    if [[ "${ENABLE_BACKUP}" == "Y" ]] && [[ "$dbsize" -gt "$bksizedb" ]]; then
+        echo "Restore Started"
+        cp -rf "${CNODE_HOME}"/db/* "${CNODE_HOME}"/backup/"${NETWORK}"-db/ 2>/dev/null
+        echo "Restore Finished"
+    fi
+fi
 
 # Customisation 
 customise () {
-find /opt/cardano/cnode -name "*config*.json" -print0 | xargs -0 sed -i 's/127.0.0.1/0.0.0.0/g' > /dev/null 2>&1 
-find /opt/cardano/cnode/files -name "cntools.config" -print0 | xargs -0 sed -i 's/ENABLE_CHATTR=true/ENABLE_CHATTR=false/g' > /dev/null 2>&1
+find /opt/cardano/cnode/files -name "*config*.json" -print0 | xargs -0 sed -i 's/127.0.0.1/0.0.0.0/g' > /dev/null 2>&1 
+grep -i ENABLE_CHATTR /opt/cardano/cnode/scripts/cntools.sh >/dev/null && sed -E -i 's/^#?ENABLE_CHATTR=(true|false)?/ENABLE_CHATTR=false/g' /opt/cardano/cnode/scripts/cntools.sh > /dev/null 2>&1
+grep -i ENABLE_DIALOG /opt/cardano/cnode/scripts/cntools.sh >/dev/null && sed -E -i 's/^#?ENABLE_DIALOG=(true|false)?/ENABLE_DIALOG=false/' /opt/cardano/cnode/scripts/cntools.sh >> /opt/cardano/cnode/scripts/cntools.sh
 find /opt/cardano/cnode/files -name "*config*.json" -print0 | xargs -0 sed -i 's/\"hasEKG\": 12788,/\"hasEKG\": [\n    \"0.0.0.0\",\n    12788\n],/g' > /dev/null 2>&1
 return 0
 }
@@ -45,23 +55,23 @@ return 0
 export UPDATE_CHECK='N'
 
 if [[ "$NETWORK" == "mainnet" ]]; then
-  $CNODE_HOME/scripts/guild-deploy.sh -n mainnet -t cnode -s -f > /dev/null 2>&2 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n mainnet -t cnode -u -s -f > /dev/null 2>&2 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "testnet" ]]; then
-  $CNODE_HOME/scripts/guild-deploy.sh -n testnet -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n testnet -t cnode -u -s -f > /dev/null 2>&1 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "preprod" ]]; then
-  $CNODE_HOME/scripts/guild-deploy.sh -n preprod -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n preprod -t cnode -u -s -f > /dev/null 2>&1 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "preview" ]]; then
-  $CNODE_HOME/scripts/guild-deploy.sh -n preview -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n preview -t cnode -u -s -f > /dev/null 2>&1 \
   && customise \
   && exec $CNODE_HOME/scripts/cnode.sh
 elif [[ "$NETWORK" == "guild-mainnet" ]]; then
-  $CNODE_HOME/scripts/guild-deploy.sh -n mainnet -t cnode -s -f > /dev/null 2>&1 \
+  $CNODE_HOME/scripts/guild-deploy.sh -n mainnet -t cnode -u -s -f > /dev/null 2>&1 \
   && bash /home/guild/.scripts/guild-topology.sh > /dev/null 2>&1 \
   && export TOPOLOGY="${CNODE_HOME}/files/guildnet-topology.json" \
   && customise > /dev/null 2>&1 \
