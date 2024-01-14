@@ -2,5 +2,8 @@
 Debian Version
 
 
-## https://github.com/hyochan/github-stats
+//## https://github.com/hyochan/github-stats
+
+![github-stats](https://stats.dooboo.io/api/github-stats?login=hyochan)
+
 ![Alt](https://repobeats.axiom.co/api/embed/eef32954c7e5ff11ee10b3e0a5229c65f728f499.svg "Repobeats analytics image")
