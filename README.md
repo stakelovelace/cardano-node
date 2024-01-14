@@ -6,5 +6,4 @@ Debian Version
 
 ### User stakelovelace Stats
 ![github-trophies](https://stats.dooboo.io/api/github-trophies?login=stakelovelace)
-![github-stats](https://stats.dooboo.io/api/github-stats?login=stakelovelace)
 ![github-stats](https://stats.dooboo.io/api/github-stats-advanced?login=stakelovelace)
